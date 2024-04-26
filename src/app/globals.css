@@ -2,32 +2,221 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Medium.ttf");
+  font-weight: 500;
+  font-display: block;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Bold.ttf");
+  font-weight: 700;
+  font-display: block;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Black.ttf");
+  font-weight: 900;
+  font-display: block;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Tajawal";
+  font-weight: 500;
+  color: #132d2b;
+}
+html {
+  scroll-behavior: smooth;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .Container1640 {
+    @apply lg:w-[85.4166666667vw] sm:w-[90%] w-[88%] mx-[auto];
+  }
+  .text17 {
+    @apply lg:text-[0.88541666666vw] lg:leading-[1.04166666667vw]
+    sm:text-[17px] sm:leading-[28px]
+    text-[15px] leading-[26px];
+  }
+  .text18 {
+    @apply lg:text-[0.9375vw] lg:leading-[1.14583333333vw]
+    sm:text-[17px] sm:leading-[28px]
+    text-[15px] leading-[26px];
+  }
+  .text20 {
+    @apply lg:text-[1.04166666667vw] lg:leading-[1.25vw]
+    sm:text-[18px] sm:leading-[28px]
+    text-[16px] leading-[26px];
+  }
+  .text22 {
+    @apply lg:text-[1.14583333333vw] lg:leading-[1.35416666667vw]
+    sm:text-[20px] sm:leading-[30px]
+    text-[18px] leading-[28px];
+  }
+  .text24 {
+    @apply lg:text-[1.25vw] lg:leading-[1.51041666667vw]
+    sm:text-[22px] sm:leading-[32px]
+    text-[20px] leading-[30px];
+  }
+  .text35 {
+    @apply lg:text-[1.82291666667vw] lg:leading-[2.1875vw] 
+    sm:text-[33px] sm:leading-[43px]
+    text-[24px] leading-[34px];
+  }
+  .text60 {
+    @apply lg:text-[3.125vw] lg:leading-[3.75vw] 
+    sm:text-[50px] sm:leading-[60px]
+    text-[30px] leading-[40px] font-[700];
+  }
+  .text100 {
+    @apply lg:text-[5.20833333333vw] lg:leading-[4.58333333333vw] lg:tracking-[0.10416666666vw]
+    sm:text-[60px] sm:leading-[60px] leading-[55px] text-[50px]
+    tracking-[2px];
+  }
+  .atlwhFull {
+    @apply absolute top-0 leftRightFixer1 w-full h-full;
+  }
+  .deepGreen > div {
+    @apply bg-opacity-[1];
+  }
+  nav ul li,
+  .langHandel {
+    @apply transition-all duration-100;
+  }
+  nav ul li.active,
+  nav ul li:hover,
+  .langHandel:hover {
+    @apply text-[#5EBD8E] font-[900];
+  }
+  .service-category.active,
+  .service-category:hover {
+    @apply bg-opacity-[0.3] bg-[#5EBD8E] text-opacity-[1];
+  }
+  .service-category.active .border,
+  .service-category:hover .border {
+    @apply bg-opacity-[1] bg-[#5EBD8E];
+  }
+
+  .border100 {
+    @apply lg:rounded-[5.20833333333vw] rounded-[100px];
+  }
+  .border20 {
+    @apply lg:rounded-[1.04166666667vw] rounded-[20px];
+  }
+
+  .f700 {
+    @apply font-[700];
+  }
+
+  .py220 {
+    @apply lg:py-[11.4583333333vw] py-[80px] sm:py-[120px];
+  }
+  .pt220 {
+    @apply lg:pt-[11.4583333333vw] pt-[80px] sm:pt-[120px];
+  }
+  .pb220 {
+    @apply lg:pb-[11.4583333333vw] pb-[80px] sm:pb-[120px];
+  }
+  .mt12 {
+    @apply lg:mt-[0.625vw] mt-[6px] sm:mt-[8px];
+  }
+  .mt24 {
+    @apply lg:mt-[1.25vw] sm:mt-[15px] mt-[12px];
+  }
+
+  .rtl .leftRightFixer1 {
+    @apply left-0;
+  }
+  .ltr .leftRightFixer1 {
+    @apply right-0;
+  }
+  .ltr .leftRightFixer2 {
+    @apply left-0;
+  }
+  .rtl .leftRightFixer2 {
+    @apply right-0;
+  }
+  .ltr .flipped {
+    @apply transform scale-x-[-1];
+  }
+  .rtl .heroPatternFixer {
+    @apply lg:left-[-2.13541666667vw] left-[-6%];
   }
 }
+
+.heroOverlay1 {
+  background: linear-gradient(
+    180deg,
+    #5ebd8e 1.65%,
+    rgba(94, 189, 142, 0) 99.51%
+  );
+  opacity: 0.2;
+}
+.heroOverlay2 {
+  opacity: 0.7;
+  background: linear-gradient(
+    180deg,
+    rgba(19, 45, 43, 0) 0%,
+    rgba(19, 45, 43, 0.51) 36.48%,
+    rgba(19, 45, 43, 0.85) 68.81%,
+    rgba(19, 45, 43, 0.92) 81.22%,
+    #132d2b 97.86%
+  );
+}
+
+/* MEDIA QUERIES  */
+
+@media (min-width: 1024px) {
+}
+@media (max-width: 1024px) {
+  /* HAMBURGER  */
+  .menu {
+    position: relative;
+  }
+  .menu span {
+    @apply absolute bg-[#fff]  h-[0.5vw] w-full  left-0 transition-all duration-300;
+  }
+
+  .menu.active {
+    top: 1px;
+  }
+  .menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+  .menu.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  .sideBar.active {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  .sideBar {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .sideBar {
+    -webkit-backdrop-filter: blur(30px) brightness(0.5);
+    backdrop-filter: blur(30px) brightness(0.5);
+    transition: all 0.5s;
+    justify-content: start;
+  }
+  body.active {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  /* HAMBURGER  */
+}
+@media (min-width: 640px) {
+}
+@media (max-width: 640px) {
+}
+
+/* MEDIA QUERIES  */
