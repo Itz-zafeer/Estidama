@@ -53,9 +53,12 @@ const Footer = () => {
                     <div>
                         <h5 className='text20 f700 text-white'>
                             اتبع النشرة الإخبارية لدينا
-                            <form className='mt12 flex lg:gap-x-[0.9375vw]'>
-                                <div className='border100 bg-[#f4fff933] lg:py-[0.78125vw] lg:px-[1.38020833333vw]'>
-                                    <input type="email" className='w-full outline-none bg-transparent text18 placeholder:text18 placeholder:f700 text-white placeholder:text-white' placeholder='البريد الإلكتروني  ' />
+                            <form className='mt12 flex lg:gap-x-[0.9375vw] items-start'>
+                                <div className='flex flex-col lg:gap-y-[0.72916666666vw] gap-y-[14px]'>
+                                    <div className='border100 bg-[#f4fff933] lg:py-[0.78125vw] lg:px-[1.38020833333vw]'>
+                                        <input type="email" className='w-full outline-none bg-transparent text18 placeholder:text18 placeholder:f700 text-white placeholder:text-white' placeholder='البريد الإلكتروني  ' />
+                                    </div>
+                                    <span className='text18 text-[red]'>*Errror*</span>
                                 </div>
                                 <button className={` block uppercase text20 bg-[#132D2B] transition-all duration-300 hover:bg-[#5EBD8E] border100 lg:px-[1.25vw] lg:py-[0.78125vw] py-[8px] px-[20px] sm:py-[10px] sm:px-[25px]`}>
                                     اشترك
