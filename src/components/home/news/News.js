@@ -5,7 +5,7 @@ import SmallCards from './SmallCards'
 
 const News = () => {
     return (
-        <section>
+        <section id='news'>
             <div className='Container1640 py220 '>
                 <Content />
                 <div className='mt56 flex flex-wrap sm:gap-y-[40px] gap-y-[30px] lg:gap-x-[2.08333333333vw]'>

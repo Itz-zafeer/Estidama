@@ -4,7 +4,7 @@ import Logos from './Logos'
 
 const Partners = () => {
     return (
-        <section>
+        <section id='partners'>
             <div className='Container1640'>
                 <div className='lg:w-[50.625vw] mx-[auto]'>
                     <Content />

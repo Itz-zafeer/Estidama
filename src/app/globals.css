@@ -108,6 +108,7 @@ html {
   .langHandel:hover {
     @apply text-[#5EBD8E] font-[900];
   }
+
   .service-category.active,
   .service-category:hover {
     @apply bg-opacity-[1] text-opacity-[1] border-opacity-[1];
@@ -169,6 +170,12 @@ html {
   .rtl .heroPatternFixer {
     @apply lg:left-[-2.13541666667vw] left-[-6%];
   }
+}
+header.sticky {
+  position: fixed;
+}
+header.sticky > div {
+  background: rgba(19, 45, 43, 1);
 }
 .formFail.active,
 .formSuccess.active {

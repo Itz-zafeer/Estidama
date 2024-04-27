@@ -1,28 +1,28 @@
 "use client";
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LinkBtn from '../common/LinkBtn'
 
 const navLinks = [
     {
-        link: '',
+        id: 'hero',
         text: "الصفحة الرئيسية",
     },
     {
-        link: '',
+        id: 'about',
         text: "من نحن",
     },
     {
-        link: '',
+        id: 'services',
         text: "خدماتنا",
     },
     {
-        link: '',
+        id: 'partners',
         text: "شركاؤنا",
     },
     {
-        link: '',
+        id: 'news',
         text: "اخر الاخبار",
     },
 ]
@@ -36,9 +36,32 @@ function toggleSidebar() {
     menu.classList.toggle("active");
 }
 
+window.addEventListener("scroll", () => {
+    var header = document.getElementById('header');
+
+    if (window.scrollY > window.innerHeight / 2) {
+        header.classList.add("sticky")
+    } else {
+        header.classList.remove("sticky")
+    }
+})
+
+
+
 const Header = ({ deepGreen }) => {
+
+    const [handelActive, sethandelActive] = useState(0)
+    function scrollToSection(sectionId, i) {
+        sethandelActive(i)
+        var headerHeight = document.getElementById('header').offsetHeight;
+        var sectionOffset = document.getElementById(sectionId).offsetTop - headerHeight;
+        window.scrollTo({
+            top: sectionOffset,
+            behavior: 'smooth',
+        });
+    }
     return (
-        <header className={`${deepGreen ? "deepGreen" : ""}  atlwhFull z-[10] h-[unset] lg:pt-[1.25vw] lg:px-[7.29166666667vw]   `}>
+        <header id='header' className={`${deepGreen ? "deepGreen" : ""}  atlwhFull z-[10] h-[unset] lg:pt-[1.25vw] lg:px-[7.29166666667vw]   `}>
             <div className='flex justify-between items-center bg-[#132D2B] bg-opacity-[0.6] lg:border100 lg:py-[1.328125vw] lg:px-[2.91666666667vw] p-[30px] sm:p-[50px]'>
                 <Link href='/' className='relative z-[3] block lg:w-[6.25vw] lg:h-[2.76041666667vw] sm:w-[160px] sm:h-[70px] w-[130px] h-[50px]'>
                     <Image src='/images/icons/logo.svg' fill alt='logo' />
@@ -47,8 +70,8 @@ const Header = ({ deepGreen }) => {
                     <ul className='sideBar lg:h-[unset] lg:w-[unset] h-[100vh]  atlwhFull lg:static lg:p-[unset] px-[5%]  sm:pt-[40vw] pt-[50vw]  flex flex-col gap-y-[30px] sm:gap-y-[50px] lg:flex-row items-center lg:gap-x-[2.91666666667vw]'>
                         {
                             navLinks.map((navLink, i) => (
-                                <li key={i} className={`${i === 0 ? "active" : ""} lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}>
-                                    <Link href='/' className="block">
+                                <li onClick={() => { scrollToSection(navLink.id, i) }} key={i} className={`${handelActive === i ? "active" : ""} lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}>
+                                    <Link href='#' className="block">
                                         {navLink.text}
                                     </Link>
                                 </li>
