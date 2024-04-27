@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const Logos = () => {
     return (
-        <div className='flex flex-wrap gap-y-[20px] gap-x-[30px] sm:gap-x-[40px] lg:gap-x-[6.04166666667vw] items-center lg:mt-[2.91666666667vw] sm:mt-[30px] mt-[20px]'>
+        <div className='flex flex-wrap gap-y-[20px] gap-x-[30px] sm:gap-x-[40px] lg:gap-x-[6.04166666667vw] items-center mt56'>
             <div className='relative lg:w-[5.46875vw] lg:h-[5.46875vw] w-[24%] h-[70px]'>
                 <Image fill src='/images/home/partners/1.svg' alt='partners' />
             </div>

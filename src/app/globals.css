@@ -59,6 +59,11 @@ html {
     sm:text-[22px] sm:leading-[32px]
     text-[20px] leading-[30px];
   }
+  .text29 {
+    @apply lg:text-[1.51041666667vw] lg:leading-[1.875vw] 
+    sm:text-[30px] sm:leading-[40px]
+    text-[22px] leading-[32px];
+  }
   .text35 {
     @apply lg:text-[1.82291666667vw] lg:leading-[2.1875vw] 
     sm:text-[33px] sm:leading-[43px]
@@ -80,8 +85,22 @@ html {
   .deepGreen > div {
     @apply bg-opacity-[1];
   }
+  .inputMain.active .error {
+    @apply block;
+  }
+  .error {
+    @apply text18 text-[red] hidden;
+  }
+
+  .listHover li:hover {
+    @apply opacity-[0.6];
+  }
+
   nav ul li,
-  .langHandel {
+  .langHandel,
+  .listHover li,
+  .newsLink,
+  .newsLink svg path {
     @apply transition-all duration-100;
   }
   nav ul li.active,
@@ -91,11 +110,7 @@ html {
   }
   .service-category.active,
   .service-category:hover {
-    @apply bg-opacity-[0.3] bg-[#5EBD8E] text-opacity-[1];
-  }
-  .service-category.active .border,
-  .service-category:hover .border {
-    @apply bg-opacity-[1] bg-[#5EBD8E];
+    @apply bg-opacity-[1] text-opacity-[1] border-opacity-[1];
   }
 
   .border100 {
@@ -108,7 +123,12 @@ html {
   .f700 {
     @apply font-[700];
   }
-
+  .mt56 {
+    @apply lg:mt-[2.91666666667vw] sm:mt-[40px] mt-[30px];
+  }
+  .mb56 {
+    @apply lg:mb-[2.91666666667vw] sm:mb-[40px] mb-[30px];
+  }
   .py220 {
     @apply lg:py-[11.4583333333vw] py-[80px] sm:py-[120px];
   }
@@ -121,8 +141,14 @@ html {
   .mt12 {
     @apply lg:mt-[0.625vw] mt-[6px] sm:mt-[8px];
   }
+  .mt16 {
+    @apply lg:mt-[0.83333333333vw] mt-[9px] sm:mt-[12px];
+  }
   .mt24 {
     @apply lg:mt-[1.25vw] sm:mt-[15px] mt-[12px];
+  }
+  .mt32 {
+    @apply lg:mt-[1.66666666667vw] sm:mt-[30px] mt-[25px];
   }
 
   .rtl .leftRightFixer1 {
@@ -144,7 +170,26 @@ html {
     @apply lg:left-[-2.13541666667vw] left-[-6%];
   }
 }
+.formFail.active,
+.formSuccess.active {
+  opacity: 1;
+  pointer-events: initial;
+}
 
+.pagination svg.active,
+.pagination svg:hover {
+  opacity: 1;
+}
+.pagination .numbers:hover,
+.pagination .numbers.active {
+  color: #5ebd8e;
+}
+.newsLink:hover {
+  color: #132d2b;
+}
+.newsLink:hover svg path {
+  fill: #132d2b;
+}
 .heroOverlay1 {
   background: linear-gradient(
     180deg,
