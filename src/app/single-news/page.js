@@ -20,7 +20,7 @@ const page = () => {
           <span className="text20 block mt32 lg:mt-[2.08333333333vw]">
             يناير 21, 2024
           </span>
-          <div className="prose  prose-lg ">
+          <div className="prose   prose-lg ">
             <h1>أفضل ١٠ وجهات سياحية في العالم</h1>
             <p>
               مرحبًا بكم في مقالتنا حول أفضل ١٠ وجهات سياحية في العالم. سنقدم
