@@ -1,30 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Regular.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
 
 @font-face {
   font-family: "Tajawal";
-  src: url("/fonts/Tajawal/Tajawal-Medium.ttf");
+  src: url("/fonts/Tajawal/Tajawal-Light.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-ExtraLight.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Medium.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-Medium.woff") format("woff");
   font-weight: 500;
-  font-display: block;
-}
-@font-face {
-  font-family: "Tajawal";
-  src: url("/fonts/Tajawal/Tajawal-Bold.ttf");
-  font-weight: 700;
-  font-display: block;
-}
-@font-face {
-  font-family: "Tajawal";
-  src: url("/fonts/Tajawal/Tajawal-Black.ttf");
-  font-weight: 900;
+  font-style: normal;
   font-display: block;
 }
 
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-ExtraBold.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Bold.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Black.woff2") format("woff2"),
+    url("/fonts/Tajawal/Tajawal-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: block;
+}
 body {
   font-family: "Tajawal";
   font-weight: 500;
   color: #132d2b;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 html {
   scroll-behavior: smooth;
@@ -111,7 +155,7 @@ html {
 
   .service-category.active,
   .service-category:hover {
-    @apply bg-opacity-[1] text-opacity-[1] border-opacity-[1];
+    @apply opacity-[1];
   }
 
   .border100 {
@@ -171,10 +215,15 @@ html {
     @apply lg:left-[-2.13541666667vw] left-[-6%];
   }
 }
-header.sticky {
+
+header {
+  transition: 0.5s all;
+}
+header.fixedHeader {
+  opacity: 0;
   position: fixed;
 }
-header.sticky > div {
+header.fixedHeader > div {
   background: rgba(19, 45, 43, 1);
 }
 .formFail.active,
@@ -215,6 +264,21 @@ header.sticky > div {
     rgba(19, 45, 43, 0.92) 81.22%,
     #132d2b 97.86%
   );
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+.swiper {
+  @apply pr-[5vw] pl-[5vw] lg:px-0;
+}
+.swiper-wrapper {
+  @apply lg:justify-center;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  @apply md:w-[2.96875vw] md:h-[2.96875vw] top-[unset] bottom-0;
 }
 
 /* MEDIA QUERIES  */
