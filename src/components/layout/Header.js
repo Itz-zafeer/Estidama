@@ -59,7 +59,7 @@ const Header = ({ deepGreen }) => {
     }
   }
 
-  useState(() => {
+  useEffect(() => {
     if (window?.location?.hash) {
       scrollToSection(window.location.hash.replace("#", ""));
     }
