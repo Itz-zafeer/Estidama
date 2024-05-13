@@ -16,6 +16,7 @@ const Logos = () => {
   }, []);
   return (
     <Swiper
+      data-aos="fade-up"
       slidesPerView={"auto"}
       navigation={true}
       modules={[Navigation]}

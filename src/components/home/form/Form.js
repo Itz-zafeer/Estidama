@@ -3,7 +3,8 @@ import React from "react";
 import Content from "./Content";
 import ErrorMsg from "./ErrorMsg";
 import SuccessMsg from "./SuccessMsg";
-import InputElements from "./InputElements";
+import useForm from "@/hooks/useForm";
+import InputField from "@/components/common/InputField";
 const handelFormSubmit = (e) => {
   e.preventDefault();
   const formFail = document.querySelector(".formFail");
@@ -68,7 +69,36 @@ const inputsData = [
     errormsg: "letter"
   }
 ];
+
+const inputFieldsData = [
+  {
+    type: "text",
+    placeholder: "الأسم *",
+    id: "name",
+    required: true
+  },
+  {
+    type: "text",
+    placeholder: "البريد الإلكتروني  *",
+    id: "email",
+    required: true
+  },
+  {
+    type: "text",
+    placeholder: "موضوع",
+    id: "subject"
+  },
+  {
+    type: "text",
+    placeholder: "رسالتك *",
+    id: "message",
+    required: true
+  }
+];
 const Form = () => {
+  const { isLoading, states, errors, handleChange, handleSubmit } =
+    useForm(inputFieldsData);
+
   return (
     <section id="contact">
       <div className="Container1640 pb220 relative">
@@ -77,11 +107,24 @@ const Form = () => {
           <ErrorMsg />
           <SuccessMsg />
           <form
-            onSubmit={handelFormSubmit}
+            onSubmit={handleSubmit}
             id="contactForm"
             className="w-full mt56"
           >
-            <InputElements inputsData={inputsData} />
+            <div className="flex flex-col lg:gap-y-[1.66666666667vw] gap-y-[20px]">
+              {inputFieldsData?.map((input, index) => (
+                <InputField
+                  key={index}
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  value={states[input.id]}
+                  error={errors[input.id]}
+                  id={input.id}
+                  widthHalf={input?.widthHalf}
+                  handleChange={handleChange}
+                />
+              ))}
+            </div>
             <button
               className={`mt56 mx-[auto] block uppercase text24 hover:bg-[#132D2B] transition-all duration-300 bg-[#5EBD8E] border100 lg:px-[3.02604166667vw] lg:py-[0.52083333333vw] py-[8px] px-[35px] sm:py-[10px] sm:px-[40px] text-white`}
             >

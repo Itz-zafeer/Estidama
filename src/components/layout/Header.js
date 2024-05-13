@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import LinkBtn from "../common/LinkBtn";
+import useAos from "@/hooks/useAos";
 
 const initalNavLinks = [
   {
@@ -43,10 +44,10 @@ const initalNavLinks = [
 // });
 
 const Header = ({ deepGreen }) => {
-  const [handelActive, sethandelActive] = useState("hero");
+  const [handelActive, sethandelActive] = useState("");
   const [navLinks, setNavLinks] = useState(initalNavLinks);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
+  useAos();
   function toggleSidebar() {
     if (window.innerWidth < 1023) {
       const body = document.querySelector("body");
@@ -57,6 +58,12 @@ const Header = ({ deepGreen }) => {
       menu.classList.toggle("active");
     }
   }
+
+  useState(() => {
+    if (window?.location?.hash) {
+      scrollToSection(window.location.hash.replace("#", ""));
+    }
+  }, []);
 
   useEffect(() => {
     var header = document.getElementById("header");
@@ -106,10 +113,11 @@ const Header = ({ deepGreen }) => {
 
   function scrollToSection(sectionId) {
     sethandelActive(sectionId);
+    setPrevScrollPos(0);
     // var headerHeight = document.getElementById("header").offsetHeight;
     var headerHeight = 0;
     var sectionOffset =
-      document.getElementById(sectionId).offsetTop - headerHeight;
+      document.getElementById(sectionId)?.offsetTop - headerHeight;
     window.scrollTo({
       top: sectionOffset,
       behavior: "smooth"
@@ -134,15 +142,18 @@ const Header = ({ deepGreen }) => {
             {navLinks.map((navLink, i) => (
               <li
                 onClick={() => {
-                  scrollToSection(navLink.id);
                   toggleSidebar();
+                  setPrevScrollPos(0);
+                  sethandelActive(navLink.id);
                 }}
                 key={i}
                 className={`${
                   handelActive === navLink.id ? "active" : ""
                 } lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}
               >
-                <span className="block cursor-pointer">{navLink.text}</span>
+                <Link href={"/#" + navLink.id} className="block cursor-pointer">
+                  {navLink.text}
+                </Link>
               </li>
             ))}
             <li className="lg:hidden block mt-[30px] ">
@@ -174,15 +185,17 @@ const Header = ({ deepGreen }) => {
               <span className="top-[60%]"></span>
             </div>
             <div className="hidden lg:block  ">
-              <span
+              <Link
+                href="/#contact"
                 onClick={() => {
-                  scrollToSection("contact");
                   toggleSidebar();
+                  setPrevScrollPos(0);
+                  sethandelActive("contact");
                 }}
                 className={` block uppercase text24 hover:bg-[#132D2B] transition-all duration-300 bg-[#5EBD8E] border100 lg:px-[1.36927083333vw] lg:py-[0.52083333333vw] py-[8px] px-[25px] sm:py-[10px] sm:px-[30px]`}
               >
                 تواصل معنا
-              </span>
+              </Link>
             </div>
           </div>
         </nav>

@@ -5,7 +5,6 @@ import News from "@/components/home/news/News";
 import Partners from "@/components/home/partners/Partners";
 import Services from "@/components/home/services/Services";
 import Layout from "@/components/layout/Layout";
-import React from "react";
 
 const page = () => {
   return (

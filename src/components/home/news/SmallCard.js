@@ -2,9 +2,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const SmallCard = ({ date, heading, link }) => {
+const SmallCard = ({ date, heading, link, delay }) => {
   return (
-    <div className="flex flex-wrap sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center">
+    <div
+      data-aos="fade"
+      data-aos-delay={delay ? delay : 0}
+      className="flex flex-wrap sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
+    >
       <Link
         href={"/single-news"}
         className="relative lg:w-[12.3958333333vw] lg:h-[11.1458333333vw] sm:w-[60%] w-[50%] h-[150px] sm:h-[250px]"

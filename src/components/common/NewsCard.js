@@ -4,7 +4,10 @@ import React from "react";
 
 const NewsCard = ({ date, heading, text, linkText, link, src, bigCard }) => {
   return (
-    <div className="flex flex-wrap  sm:gap-y-[25px] gap-y-[20px] items-center lg:gap-x-[2.08333333333vw]">
+    <div
+      data-aos="fade"
+      className="flex flex-wrap  sm:gap-y-[25px] gap-y-[20px] items-center lg:gap-x-[2.08333333333vw]"
+    >
       <Link
         className={`relative ${
           bigCard
