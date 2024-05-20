@@ -9,8 +9,17 @@ export const homeQuery = () => {
         locale
         title
         ... on Entry_Pages_Home {
+          seo_title
+          seo_description
+          seo_image {
+            src(width: 1200, height: 628)
+          }
+          seo_keywords
           hero_title
           hero_description
+          hero_fallback_image {
+            src(width: 1920, height: 1080)
+          }
           hero_home_video {
             extension
             permalink
@@ -21,7 +30,7 @@ export const homeQuery = () => {
           }
           about_image {
             extension
-            src(width: 200, height: 200)
+            src(width: 800, height: 720)
             ... on Asset_Assets {
               alt
             }
@@ -41,7 +50,7 @@ export const homeQuery = () => {
               service_description
               service_image {
                 extension
-                src(width: 200, height: 200)
+                src(width: 800, height: 720)
                 ... on Asset_Assets {
                   alt
                 }
@@ -68,7 +77,7 @@ export const homeQuery = () => {
             ... on Entry_News_News {
               news_image {
                 extension
-                src(width: 200, height: 200)
+                src(width: 520, height: 468)
                 ... on Asset_Assets {
                   alt
                 }
@@ -78,6 +87,16 @@ export const homeQuery = () => {
           }
           contact_title_heading
           contact_description
+        }
+      }
+      globalSet(handle: "global_settings", site: "english") {
+        ... on GlobalSet_GlobalSettings {
+          seo_title
+          seo_description
+          seo_image {
+            src(width: 1200, height: 628)
+          }
+          seo_keywords
         }
       }
     }

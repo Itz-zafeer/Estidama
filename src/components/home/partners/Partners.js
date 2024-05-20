@@ -2,7 +2,7 @@ import React from "react";
 import Content from "./Content";
 import Logos from "./Logos";
 
-const Partners = ({ content, logos }) => {
+const Partners = ({ content }) => {
   return (
     <section
       id="partners"
@@ -13,7 +13,7 @@ const Partners = ({ content, logos }) => {
           <Content title={content?.title} desc={content?.desc} />
         </div>
       </div>
-      <Logos logos={logos} />
+      <Logos logos={content?.logos} />
     </section>
   );
 };

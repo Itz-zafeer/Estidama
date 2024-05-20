@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const SmallCard = ({ date, heading, link, delay }) => {
+const SmallCard = ({ content, delay, arabic }) => {
   return (
     <div
       data-aos="fade"
@@ -10,26 +10,34 @@ const SmallCard = ({ date, heading, link, delay }) => {
       className="flex flex-wrap sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
     >
       <Link
-        href={"/single-news"}
+        href={`${arabic ? "" : "en"}/news/${content?.slug}`}
         className="relative lg:w-[12.3958333333vw] lg:h-[11.1458333333vw] sm:w-[60%] w-[50%] h-[150px] sm:h-[250px]"
       >
-        <Image
-          fill
-          src="/images/home/news/smallcard/1.jpg"
-          alt="news"
-          className="border20 object-cover"
-        />
+        {content?.news_image?.src && (
+          <Image
+            fill
+            src={content?.news_image?.src}
+            alt={checkIfContentExist(
+              content?.news_image?.src,
+              content?.title,
+              "News"
+            )}
+            className="border20 object-cover"
+          />
+        )}
       </Link>
       <div className="lg:w-[19.7916666667vw]  ">
-        <span className="text18">{date}</span>
+        <span className="text18">{content?.date}</span>
         <h4 className="text29 mt12 f700 line-clamp-2 lg:h-[3.75vw]">
-          {heading}
+          {content?.title}
         </h4>
         <Link
-          href="/single-news"
+          href={`${arabic ? "" : "en"}/news/${content?.slug}`}
           className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
         >
-          <span className="text24 "> {link}</span>
+          <span className="text24 ">
+            {arabic ? "اقرا المزيد" : "Read More"}
+          </span>
           <svg
             width="24"
             height="25"

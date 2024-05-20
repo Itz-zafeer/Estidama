@@ -150,7 +150,10 @@ html {
   nav ul li.active,
   nav ul li:hover,
   .langHandel:hover {
-    @apply text-[#5EBD8E] font-[900];
+    @apply text-[#5EBD8E];
+  }
+  nav ul li.active {
+    @apply font-[900];
   }
 
   .service-category.active,
@@ -217,7 +220,7 @@ html {
 }
 
 header {
-  transition: 0.5s all;
+  transition: 0.3s all;
 }
 header.fixedHeader {
   opacity: 0;

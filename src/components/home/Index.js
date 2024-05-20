@@ -6,12 +6,13 @@ import Partners from "@/components/home/partners/Partners";
 import Services from "@/components/home/services/Services";
 import checkIfContentExist from "@/utils/setAltTag";
 import setAltTag from "@/utils/setAltTag";
-const HomePage = ({ data }) => {
+const HomePage = ({ data, arabic, translations }) => {
   const heroContent = {
-    title: data?.hero_title,
+    title: checkIfContentExist(data?.hero_title),
     desc: checkIfContentExist(data?.hero_description),
     video: data?.hero_home_video?.permalink,
-    mobVideo: data?.hero_home_mobile_video?.permalink
+    mobVideo: data?.hero_home_mobile_video?.permalink,
+    img: data?.hero_fallback_image?.src
   };
   const aboutContent = {
     img: {
@@ -32,32 +33,36 @@ const HomePage = ({ data }) => {
     }
   };
   const servicesContent = {
-    title: data?.services_title_heading,
+    title: checkIfContentExist(data?.services_title_heading),
     services: data?.services
   };
   const partnersContent = {
-    title: data?.companies_title_heading,
+    title: checkIfContentExist(data?.companies_title_heading),
     desc: checkIfContentExist(data?.companies_description),
     logos: data?.logos
   };
   const newsContent = {
     tagline: data?.news_smaller_title_heading,
-    title: data?.news_title_heading,
+    title: checkIfContentExist(data?.news_title_heading),
     desc: checkIfContentExist(data?.news_description),
     news: data?.selected_news
   };
   const formContent = {
-    title: data?.contact_title_heading,
+    title: checkIfContentExist(data?.contact_title_heading),
     desc: checkIfContentExist(data?.contact_description)
   };
   return (
     <>
-      <Hero content={heroContent} />
-      <Mission content={aboutContent} />
-      <Services content={servicesContent} />
-      <Partners content={partnersContent} />
-      <News content={newsContent} />
-      <Form content={formContent} />
+      <Hero content={heroContent} arabic={arabic} />
+      <Mission content={aboutContent} arabic={arabic} />
+      <Services content={servicesContent} arabic={arabic} />
+      <Partners content={partnersContent} arabic={arabic} />
+      <News content={newsContent} arabic={arabic} />
+      <Form
+        content={formContent}
+        arabic={arabic}
+        translations={translations?.form}
+      />
     </>
   );
 };

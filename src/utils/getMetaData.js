@@ -1,5 +1,5 @@
-import getData from "@/lib/data-hooks/getData";
-import getPagesData from "@/lib/data-hooks/getPagesData";
+import getData from "@/lib/data-hook/getData";
+import getPagesData from "@/lib/data-hook/getPagesData";
 
 const getMetaData = async ({ slug, isAr }) => {
   const {
@@ -7,8 +7,8 @@ const getMetaData = async ({ slug, isAr }) => {
   } = await getPagesData(isAr);
   const data = await getData(slug, pagesData, isAr);
 
-  const pageSeo = data?.page?.seo_section;
-  const fallbackSeo = data?.fallbackSEO;
+  const pageSeo = data?.page;
+  const fallbackSeo = data?.globalSet;
 
   const title = pageSeo?.seo_title
     ? pageSeo?.seo_title

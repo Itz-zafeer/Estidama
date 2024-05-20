@@ -18,7 +18,7 @@ export const newsQuery = () => {
             title
             news_image {
               extension
-              src(width: 200, height: 200)
+              src(width: 380, height: 342)
               ... on Asset_Assets {
                 alt
               }

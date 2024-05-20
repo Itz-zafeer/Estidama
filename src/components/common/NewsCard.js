@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const NewsCard = ({ bigCard, content }) => {
+const NewsCard = ({ bigCard, content, arabic }) => {
   return (
     <div
       data-aos="fade"
@@ -15,7 +15,7 @@ const NewsCard = ({ bigCard, content }) => {
             ? "lg:w-[27.0833333333vw] lg:h-[24.375vw]"
             : "lg:w-[19.7916666667vw] lg:h-[17.8125vw]"
         } sm:w-[70%] w-full h-[250px] sm:h-[350px]`}
-        href={`/news/${content?.slug}`}
+        href={`${arabic ? "" : "en"}/news/${content?.slug}`}
       >
         {content?.news_image?.src && (
           <Image
@@ -42,10 +42,12 @@ const NewsCard = ({ bigCard, content }) => {
           }}
         ></div>
         <Link
-          href={`/news/${content?.slug}`}
+          href={`${arabic ? "" : "en"}/news/${content?.slug}`}
           className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
         >
-          <span className="text24 "> اقرا المزيد</span>
+          <span className="text24 ">
+            {arabic ? "اقرا المزيد" : "Read More"}
+          </span>
           <svg
             width="24"
             height="25"

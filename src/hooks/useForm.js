@@ -1,4 +1,5 @@
 import postForm from "@/utils/postForm";
+import checkIfContentExist from "@/utils/setAltTag";
 import React, { useEffect, useRef, useState } from "react";
 function scrollToElementById(id, offset) {
   const element = document.getElementById(id);
@@ -24,7 +25,7 @@ const validateEmail = (email) => {
   return emailRegex.test(email);
 };
 
-const useForm = (inputFieldsData, endpoint, arabic) => {
+const useForm = ({ inputFieldsData, endpoint, arabic, errorMessages }) => {
   const [states, setStates] = useState({});
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
@@ -50,7 +51,7 @@ const useForm = (inputFieldsData, endpoint, arabic) => {
     captchaRef?.current?.reset();
     setTimeout(() => {
       setStatus("");
-    }, 8000);
+    }, 12000);
   };
   useEffect(() => {
     resetForm();
@@ -70,7 +71,10 @@ const useForm = (inputFieldsData, endpoint, arabic) => {
 
     Object.keys(states).forEach((key, index) => {
       if (!states[key] && inputFieldsData[index]?.required) {
-        newErrors[key] = arabic ? "هذا الحقل مطلوب" : "This Field is Required";
+        newErrors[key] = checkIfContentExist(
+          errorMessages?.requiredError,
+          "Required"
+        );
         if (!isError) {
           isError = true;
           // errorElement
@@ -79,9 +83,10 @@ const useForm = (inputFieldsData, endpoint, arabic) => {
         }
       } else if (key.toLowerCase().includes("email")) {
         if (!validateEmail(states[key])) {
-          newErrors[key] = arabic
-            ? "البريد الإلكتروني غير صحيح"
-            : "The Email isn't Correct";
+          newErrors[key] = checkIfContentExist(
+            errorMessages?.emailError,
+            "Email not Valid"
+          );
           isError = true;
         }
       }

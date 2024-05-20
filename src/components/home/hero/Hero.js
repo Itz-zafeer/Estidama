@@ -12,7 +12,11 @@ const Hero = ({ content }) => {
     >
       <div className="atlwhFull overflow-hidden">
         <Overlays />
-        <HeroImg video={content?.video} mobVideo={content?.mobVideo} />
+        <HeroImg
+          video={content?.video}
+          mobVideo={content?.mobVideo}
+          img={content?.img}
+        />
         <SkipSection />
       </div>
       <Content title={content?.title} desc={content?.desc} />

@@ -10,18 +10,18 @@ import React from "react";
 
 export const revalidate = 5;
 export async function generateMetadata({ params }, parent) {
-  return await getMetaData({ slug: "news", isAr: true });
+  return await getMetaData({ slug: "news" });
 }
 
 const page = async () => {
   const currentPage = 1;
   const limit = 4;
-  const newsData = await getNewsData(currentPage, limit, "arabic");
-  const pageData = await getData("news", "arabic");
+  const newsData = await getNewsData(currentPage, limit);
+  const pageData = await getData("news");
   const translationsData = translations;
 
   return (
-    <Layout arabic deepGreen translations={translationsData?.layout}>
+    <Layout deepGreen translations={translationsData?.layout}>
       <SubHero
         title={pageData?.page?.news_title_heading}
         desc={pageData.page?.news_description}

@@ -1,4 +1,5 @@
 import getHomeData from "./getHomeData.js";
+import getNewsPageData from "./getNewsPageData.js";
 import getPagesData from "./getPagesData.js";
 
 const getData = async (slug, isAr) => {
@@ -10,6 +11,8 @@ const getData = async (slug, isAr) => {
     switch (blueprint) {
       case "home":
         return await getHomeData(slug, isAr);
+      case "news":
+        return await getNewsPageData(slug, isAr);
     }
   };
 

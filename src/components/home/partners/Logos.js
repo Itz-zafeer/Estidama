@@ -7,11 +7,13 @@ import React from "react";
 import Image from "next/image";
 
 const Logos = ({ logos }) => {
+  console.log(logos);
   const [swiperGap, setSwiperGap] = useState(0);
   const [isMobile, setIsMobile] = useState(true);
   useEffect(() => {
     setSwiperGap(
-      window?.innerWidth > 768 ? (window?.innerWidth / 100) * 6.04166666667 : 40
+      // window?.innerWidth > 768 ? (window?.innerWidth / 100) * 6.04166666667 : 40
+      window?.innerWidth > 768 ? (window?.innerWidth / 100) * 2.04166666667 : 40
     );
   }, []);
   return (
@@ -28,8 +30,21 @@ const Logos = ({ logos }) => {
     >
       {/* <div className="flex flex-wrap gap-y-[20px] gap-x-[30px] sm:gap-x-[40px] lg:gap-x-[6.04166666667vw] items-center mt56"> */}
       {/* <div className="flex flex-wrap gap-y-[20px] gap-x-[30px]   items-center mt56"> */}
+      {logos?.map((logo, index) => (
+        <SwiperSlide
+          key={index}
+          className="relative lg:w-[11.5vw] lg:h-[6vw] w-[24%] h-[70px]"
+        >
+          <Image
+            fill
+            src={logo?.logos_image_special?.permalink}
+            alt="partner"
+            className="w-full object-contain"
+          />
+        </SwiperSlide>
+      ))}
 
-      <SwiperSlide className="relative lg:w-[5.46875vw] lg:h-[5.46875vw] w-[24%] h-[70px]">
+      {/* <SwiperSlide className="relative lg:w-[5.46875vw] lg:h-[5.46875vw] w-[24%] h-[70px]">
         <Image fill src="/images/home/partners/1.svg" alt="partners" />
       </SwiperSlide>
       <SwiperSlide className="relative lg:w-[14.0625vw] lg:h-[5vw] sm:w-[41%] w-[65%] sm:h-[107px] h-[86px]">
@@ -40,7 +55,7 @@ const Logos = ({ logos }) => {
       </SwiperSlide>
       <SwiperSlide className="relative lg:w-[7.5vw] lg:h-[5.46875vw] w-[28%] h-[70px]">
         <Image fill src="/images/home/partners/3.svg" alt="partners" />
-      </SwiperSlide>
+      </SwiperSlide> */}
 
       {isMobile || <SwiperButtons />}
       {/* </div> */}

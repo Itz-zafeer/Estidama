@@ -8,14 +8,14 @@ import React from "react";
 
 export const revalidate = 5;
 export async function generateMetadata({ params }, parent) {
-  return await getMetaData({ slug: params.slug, isAr: true });
+  return await getMetaData({ slug: params.slug });
 }
 const page = async ({ params }) => {
   const slug = params.slug;
-  const data = await getSingleNewsData(slug, "arabic");
+  const data = await getSingleNewsData(slug);
   console.log(data);
   return (
-    <Layout deepGreen arabic>
+    <Layout deepGreen>
       <div className=" Container1640 pb220 lg:w-[70.8333333333vw] lg:pt-[17.2916666667vw] pt-[50vw] sm:pt-[40vw]">
         <SubHero title={checkIfContentExist(data?.entry?.title)} />
         <div className="mt32">
@@ -39,7 +39,9 @@ const page = async ({ params }) => {
           <div
             className=" news__Content"
             dangerouslySetInnerHTML={{
-              __html: data?.entry?.news_description_with_html
+              __html: checkIfContentExist(
+                data?.entry?.news_description_with_html
+              )
             }}
           ></div>
         </div>

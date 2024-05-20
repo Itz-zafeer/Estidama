@@ -6,70 +6,6 @@ import SuccessMsg from "./SuccessMsg";
 import useForm from "@/hooks/useForm";
 import InputField from "@/components/common/InputField";
 import CaptchaField from "@/components/common/CaptchaField";
-const handelFormSubmit = (e) => {
-  e.preventDefault();
-  const formFail = document.querySelector(".formFail");
-  const formSuccess = document.querySelector(".formSuccess");
-  const contactForm = document.getElementById("contactForm");
-  if (!navigator.onLine) {
-    // alert("Network is offline. Please check your internet connection and try again.");
-    contactForm.style.opacity = 0;
-    contactForm.style.pointerEvents = "none";
-    formFail.classList.add("active");
-    setTimeout(() => {
-      formFail.classList.remove("active");
-      contactForm.style.opacity = 1;
-      contactForm.style.pointerEvents = "initial";
-    }, 8000);
-    return;
-  }
-
-  let formIsValid = true;
-  const inputEls = document.querySelectorAll("#contactForm .inputMain input");
-  inputEls.forEach((inputEl) => {
-    if (!inputEl.value) {
-      inputEl.parentElement.parentElement.classList.add("active");
-      formIsValid = false;
-      setTimeout(() => {
-        inputEl.parentElement.parentElement.classList.remove("active");
-      }, 8000);
-    }
-  });
-  if (formIsValid) {
-    // Form submission logic here
-    contactForm.style.opacity = 0;
-    contactForm.style.pointerEvents = "none";
-    formSuccess.classList.add("active");
-
-    setTimeout(() => {
-      formSuccess.classList.remove("active");
-      contactForm.style.opacity = 1;
-      contactForm.style.pointerEvents = "initial";
-    }, 8000);
-    console.log("Form submitted successfully!");
-  } else {
-    console.log("Form submission failed. Please fill in all required fields.");
-  }
-};
-const inputsData = [
-  {
-    placeholder: "الأسم *",
-    errormsg: "name"
-  },
-  {
-    placeholder: "البريد الإلكتروني  *",
-    type: "email",
-    errormsg: "email"
-  },
-  {
-    placeholder: "موضوع",
-    errormsg: "Theme"
-  },
-  {
-    placeholder: "رسالتك *",
-    errormsg: "letter"
-  }
-];
 
 const inputFieldsData = [
   {
@@ -96,7 +32,7 @@ const inputFieldsData = [
     required: true
   }
 ];
-const Form = ({ arabic, content }) => {
+const Form = ({ arabic, content, translations }) => {
   const {
     isLoading,
     states,
@@ -108,18 +44,29 @@ const Form = ({ arabic, content }) => {
     captchaRef,
     captchaError,
     handleRecaptchaChange
-  } = useForm(inputFieldsData, "career_form", arabic);
+  } = useForm({
+    inputFieldsData: translations?.inputFieldsData,
+    endpoint: "contact",
+    arabic,
+    errorMessages: translations?.errors
+  });
 
   return (
     <section id="contact">
       <div className="Container1640 pb220 relative">
         <div className="lg:w-[42.1875vw] w-full mx-[auto]">
           <Content title={content?.title} desc={content?.desc} />
-
+          {status && status == "success" ? (
+            <SuccessMsg message={translations?.successMessage} />
+          ) : (
+            status == "failed" && (
+              <ErrorMsg message={translations?.errorMessage} />
+            )
+          )}
           <form
             onSubmit={handleSubmit}
             id="contactForm"
-            className="w-full mt56"
+            className={`w-full mt56 ${status ? "opacity-0" : "opacity-1"}`}
           >
             <div className="flex flex-col lg:gap-y-[1.66666666667vw] gap-y-[20px]">
               {inputFieldsData?.map((input, index) => (
@@ -135,11 +82,7 @@ const Form = ({ arabic, content }) => {
                 />
               ))}
             </div>
-            {status && status == "success" ? (
-              <SuccessMsg />
-            ) : (
-              status == "failed" && <ErrorMsg />
-            )}
+
             <CaptchaField
               captchaError={captchaError}
               captchaRef={captchaRef}
@@ -147,9 +90,11 @@ const Form = ({ arabic, content }) => {
               arabic={arabic}
             />
             <button
-              className={`mt56 mx-[auto] block uppercase text24 hover:bg-[#132D2B] transition-all duration-300 bg-[#5EBD8E] border100 lg:px-[3.02604166667vw] lg:py-[0.52083333333vw] py-[8px] px-[35px] sm:py-[10px] sm:px-[40px] text-white`}
+              className={`mt56 mx-[auto] block uppercase text24 ${
+                isLoading ? " pointer-events-none " : " hover:bg-[#132D2B] "
+              } transition-all duration-300 bg-[#5EBD8E] border100 lg:px-[3.02604166667vw] lg:py-[0.52083333333vw] py-[8px] px-[35px] sm:py-[10px] sm:px-[40px] text-white`}
             >
-              ارسل
+              {isLoading ? "Loading..." : "      ارسل"}
             </button>
           </form>
         </div>

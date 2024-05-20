@@ -2,8 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import LinkBtn from "../common/LinkBtn";
 import useAos from "@/hooks/useAos";
+import useDetectLang from "@/hooks/useDetectLang";
 
 const initalNavLinks = [
   {
@@ -43,11 +47,12 @@ const initalNavLinks = [
 //   }
 // });
 
-const Header = ({ deepGreen }) => {
+const Header = ({ deepGreen, translations }) => {
   const [handelActive, sethandelActive] = useState("");
   const [navLinks, setNavLinks] = useState(initalNavLinks);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   useAos();
+  useDetectLang();
   function toggleSidebar() {
     if (window.innerWidth < 1023) {
       const body = document.querySelector("body");
@@ -114,15 +119,30 @@ const Header = ({ deepGreen }) => {
   function scrollToSection(sectionId) {
     sethandelActive(sectionId);
     setPrevScrollPos(0);
-    // var headerHeight = document.getElementById("header").offsetHeight;
-    var headerHeight = 0;
+    var headerHeight = document.getElementById("header").offsetHeight;
+    // var headerHeight = 0;
     var sectionOffset =
-      document.getElementById(sectionId)?.offsetTop - headerHeight;
+      document.getElementById(sectionId)?.offsetTop + headerHeight;
     window.scrollTo({
       top: sectionOffset,
       behavior: "smooth"
     });
   }
+
+  const pathname = usePathname();
+  let newPath = pathname.includes("/en/")
+    ? pathname.replace("/en", "")
+    : pathname == "/en"
+    ? pathname.replace("/en", "")
+    : "/en" + pathname;
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
+  newPath = page ? newPath + "?page=" + page : newPath;
+
+  const router = useRouter();
+  const handleLang = () => {
+    router.push(newPath || "/");
+  };
   return (
     <header
       id="header"
@@ -169,12 +189,12 @@ const Header = ({ deepGreen }) => {
             </li>
           </ul>
           <div className="relative z-[3] flex lg:gap-x-[1.25vw] sm:gap-x-[30px] gap-x-[20px] items-center">
-            <Link
-              href="/"
-              className="block uppercase text24 font-[900] langHandel"
+            <span
+              onClick={handleLang}
+              className="block uppercase text24 font-[900] langHandel cursor-pointer"
             >
-              EN
-            </Link>
+              {translations?.languageSwitch}
+            </span>
             <span className="  block lg:hidden w-[1px] sm:h-[30px] h-[20px]  bg-[#FFF] "></span>
             <div
               onClick={toggleSidebar}

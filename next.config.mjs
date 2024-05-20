@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "estimda-cms.brackets-tech.com",
+        hostname: "estimada-cms.brackets-tech.com",
         port: "",
         pathname: "/img/asset/**"
       }

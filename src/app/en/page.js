@@ -7,15 +7,15 @@ import getMetaData from "@/utils/getMetaData";
 export const revalidate = 5;
 
 export async function generateMetadata({ params }, parent) {
-  return await getMetaData({ slug: "home", isAr: true });
+  return await getMetaData({ slug: "home" });
 }
 
 const page = async () => {
-  const data = await getHomeData("home", "arabic");
+  const data = await getHomeData("home");
   const translationsData = translations;
   return (
-    <Layout arabic translations={translationsData?.layout}>
-      <HomePage data={data?.page} arabic translations={translationsData} />
+    <Layout translations={translationsData?.layout}>
+      <HomePage data={data?.page} translations={translationsData} />
     </Layout>
   );
 };

@@ -1,7 +1,7 @@
 import LinkBtn from "@/components/common/LinkBtn";
 import React from "react";
 
-const Content = ({ tagline, title, desc }) => {
+const Content = ({ tagline, title, desc, arabic }) => {
   return (
     <div
       data-aos="fade-up"
@@ -18,7 +18,7 @@ const Content = ({ tagline, title, desc }) => {
           dangerouslySetInnerHTML={{ __html: desc }}
         ></div>
       </div>
-      <LinkBtn link={"/news"} text="اكتشف المزيد" />
+      <LinkBtn link={"/news"} text={arabic ? "اكتشف المزيد" : "Explore All"} />
     </div>
   );
 };

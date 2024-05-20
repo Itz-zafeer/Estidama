@@ -4,14 +4,14 @@ import Footer from "./footer/Footer";
 import getHeaderData from "@/lib/data-hook/getHeaderData";
 import getFooterData from "@/lib/data-hook/getFooterData";
 
-const Layout = async ({ children, deepGreen, arabic }) => {
+const Layout = async ({ children, deepGreen, arabic, translations }) => {
   const headerData = await getHeaderData(arabic);
   const footerData = await getFooterData(arabic);
   return (
     <>
-      <Header deepGreen={deepGreen} />
+      <Header deepGreen={deepGreen} translations={translations?.header} />
       <main>{children}</main>
-      <Footer />
+      <Footer translations={translations?.footer} />
     </>
   );
 };
