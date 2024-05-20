@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-const Content = () => {
+const Content = ({ title, desc, counter1, counter2 }) => {
   const ref = useRef(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [count, setCount] = useState(0);
@@ -20,8 +20,8 @@ const Content = () => {
 
   const animateNumber = () => {
     let start = 0;
-    const end = 40;
-    const end2 = 19;
+    const end = counter1?.number;
+    const end2 = counter2?.number;
     const duration = 2000; // in milliseconds
     const range = end - start;
     const range2 = end2 - start;
@@ -65,22 +65,18 @@ const Content = () => {
   return (
     <div ref={ref} className="lg:w-[37.3958333333vw]">
       <div>
-        <h3 data-aos="fade-up" data-aos-delay="200" className="text35">
-          مهمتنا هي جمع المواد القابلة للتدوير من مصادر مختلفة مثل القطاعات
-          التجارية والسكنية، والصناعية بمحافظة{" "}
-          <span className="text-[#5EBD8E]">جدة</span>، وتصنيفها، وفرزها بطريقة
-          فعالة لإعادة التدوير
-        </h3>
-        <p
+        <h3
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="text35"
+          dangerouslySetInnerHTML={{ __html: title }}
+        ></h3>
+        <div
           data-aos="fade-down"
           data-aos-delay="200"
           className="text22 text-[#132D2B] text-opacity-[0.7] mt12"
-        >
-          نحن نعمل على توفير حلول شاملة لإدارة النفايات، وتعزيز ثقافة إعادة
-          التدوير والاستدامة. ونساهم في الحفاظ على البيئة وتقليل التلوث من خلال
-          جمع، وفرز المواد القابلة للتدوير، ثم إعادة تدويرها من خلال المصانع
-          المحلية.
-        </p>
+          dangerouslySetInnerHTML={{ __html: desc }}
+        ></div>
       </div>
       <div
         data-aos="fade"
@@ -92,11 +88,11 @@ const Content = () => {
             {/* <span className='text100 text-[#5EBD8E]'>٤٠</span> */}
             <span className="text100 text-[#5EBD8E]">{count}</span>
             <span className="text20 text-[#000000] text-opacity-[0.7] lg:mb-[0.3125vw] mb-[6px]">
-              شاحنة{" "}
+              {counter1?.title}
             </span>
           </div>
           <p className="text17 text-[#000000] mt12 lg:mt-[0.52083333333vw]">
-            تقوم بجمع ونقل المواد القابلة لإعادة التدوير
+            {counter1?.desc}
           </p>
         </div>
         <div>
@@ -104,11 +100,11 @@ const Content = () => {
             {/* <span className='text100 text-[#5EBD8E]'>١٩ </span> */}
             <span className="text100 text-[#5EBD8E]">{count2} </span>
             <span className="text20 text-[#000000] text-opacity-[0.7] lg:mb-[0.3125vw] mb-[6px]">
-              مركز{" "}
+              {counter2?.title}
             </span>
           </div>
           <p className="text17 text-[#000000] mt12 lg:mt-[0.52083333333vw]">
-            جميع مراكزنا مجهزة لاستلام المواد
+            {counter2?.desc}
           </p>
         </div>
       </div>

@@ -1,8 +1,9 @@
+import checkIfContentExist from "@/utils/setAltTag";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const NewsCard = ({ date, heading, text, linkText, link, src, bigCard }) => {
+const NewsCard = ({ bigCard, content }) => {
   return (
     <div
       data-aos="fade"
@@ -14,28 +15,37 @@ const NewsCard = ({ date, heading, text, linkText, link, src, bigCard }) => {
             ? "lg:w-[27.0833333333vw] lg:h-[24.375vw]"
             : "lg:w-[19.7916666667vw] lg:h-[17.8125vw]"
         } sm:w-[70%] w-full h-[250px] sm:h-[350px]`}
-        href={link}
+        href={`/news/${content?.slug}`}
       >
-        <Image
-          fill
-          src={`${src}`}
-          alt="news"
-          className="border20 object-cover"
-        />
+        {content?.news_image?.src && (
+          <Image
+            fill
+            src={content?.news_image?.src}
+            alt={checkIfContentExist(
+              content?.news_image?.src,
+              content?.title,
+              "News"
+            )}
+            className="border20 object-cover"
+          />
+        )}
       </Link>
       <div className="lg:w-[19.7916666667vw] w-full">
-        <span className="text18">{date}</span>
+        <span className="text18">{content?.date}</span>
         <h4 className="text29 f700 mt12 line-clamp-2 lg:h-[3.75vw]">
-          {heading}
+          {content?.title}
         </h4>
-        <p className="text22 text-[#132D2B] mt16 line-clamp-[5] lg:h-[6.77083333333vw] text-opacity-[0.7]">
-          {text}
-        </p>
+        <div
+          className="text22 text-[#132D2B] mt16 line-clamp-[5] lg:h-[6.77083333333vw] text-opacity-[0.7]"
+          dangerouslySetInnerHTML={{
+            __html: content?.news_description_with_html
+          }}
+        ></div>
         <Link
-          href={link}
+          href={`/news/${content?.slug}`}
           className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
         >
-          <span className="text24 "> {linkText}</span>
+          <span className="text24 "> اقرا المزيد</span>
           <svg
             width="24"
             height="25"

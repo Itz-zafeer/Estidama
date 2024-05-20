@@ -1,42 +1,87 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BannerImg from "@/components/common/BannerImg";
 import Content from "./Content";
+import checkIfContentExist from "@/utils/setAltTag";
+const Services = ({ content }) => {
+  const [serviceItems, setServiceItems] = useState([]);
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
 
-const categories = [
-  {
-    category:
-      "جمع، ونقل واستلام المواد القابلة لإعادة التدوير المفروزة من المصدر.",
-    img: "/images/home/services/1.jpg"
-  },
-  {
-    category:
-      "توفير مواد قابلة لإعادة التدوير عالية الجودة تشمل كافة أنواع النفايات البلدية الصلبة ، ونفايات الالكترونيات، والمواد المصاحبة لها.",
-    img: "/images/home/services/2.jpg"
-  },
-  {
-    category: "إضافة صور عن مراكز الشركة ومركباتها في الأماكن المناسبة.",
-    img: "/images/home/services/3.jpg"
-  }
-];
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef(null);
+  const intervalRef = useRef(null);
 
-const Services = () => {
-  const [categoryImg, setCategoryImg] = useState("/images/home/services/1.jpg");
-  const [handelActiveCategory, sethandelActiveCategory] = useState(0);
-  const handelActive = (i, categoryImg) => {
-    sethandelActiveCategory(i);
-    setCategoryImg(categoryImg);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        // Adjust the visibility check threshold as needed
+        const isVisible =
+          rect.top <= window.innerHeight - (window.innerWidth / 100) * 3;
+        if (isVisible && !hasStarted) {
+          setHasStarted(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Initial check in case the component is already in view
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    setCurrentCategoryIndex(1);
+    intervalRef.current = setInterval(() => {
+      setCurrentCategoryIndex((prevIndex) => {
+        if (prevIndex >= 3) {
+          clearInterval(intervalRef.current);
+          return 3; // Reset to 1 if it goes beyond 3
+        }
+        return prevIndex + 1;
+      });
+    }, 5000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [hasStarted]);
+
+  const handleCategoryIndex = (index) => {
+    setCurrentCategoryIndex(index);
+    clearInterval(intervalRef.current);
   };
 
+  useEffect(() => {
+    let newServices = [];
+    content?.services?.forEach((service) => newServices.push(service));
+
+    setServiceItems(newServices);
+  }, []);
+
   return (
-    <section id="services">
-      <div className="Container1640 lg:pt-[11.4583333333vw] pt-[80px] sm:pt-[120px] flex flex-col-reverse lg:flex-row lg:items-center lg:gap-x-[9.375vw] sm:gap-y-[40px] gap-y-[30px] flex-wrap">
-        <Content
-          categories={categories}
-          handelActive={handelActive}
-          handelActiveCategory={handelActiveCategory}
-        />
-        <BannerImg src={categoryImg} alt={"services"} />
+    <section ref={ref} id="services">
+      <div className="Container1640 min-h-[48.9583333333vw] lg:pt-[11.4583333333vw] pt-[80px] sm:pt-[120px] flex flex-col-reverse lg:flex-row lg:items-center lg:gap-x-[9.375vw] sm:gap-y-[40px] gap-y-[30px] flex-wrap">
+        {serviceItems?.length > 0 && (
+          <>
+            <Content
+              serviceItems={serviceItems}
+              content={content}
+              currentCategoryIndex={currentCategoryIndex}
+              handleCategoryIndex={handleCategoryIndex}
+            />
+            <BannerImg
+              src={serviceItems[currentCategoryIndex - 1]?.service_image?.src}
+              alt={checkIfContentExist(
+                serviceItems[currentCategoryIndex - 1]?.service_image?.alt,
+                serviceItems[currentCategoryIndex - 1]?.service_description
+              )}
+            />
+          </>
+        )}
       </div>
     </section>
   );

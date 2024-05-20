@@ -1,14 +1,16 @@
 import React from "react";
 import Image from "next/image";
 
-const Content = () => {
+const Content = ({ title, desc }) => {
   return (
     <div className="relative z-[2] Container1640">
       <div className=" text-[#FFFFFF] lg:w-[41.6666666667vw] mx-[auto] text-center">
         <div className="relative">
-          <h1 data-aos="fade-up" className="text60 f700">
-            نسعى لتحقيق الريادة في تبني أفضل الممارسات البيئية
-          </h1>
+          <h1
+            data-aos="fade-up"
+            className="text60 f700"
+            dangerouslySetInnerHTML={{ __html: title }}
+          ></h1>
           <div
             data-aos="fade"
             data-aos-delay="200"
@@ -22,15 +24,11 @@ const Content = () => {
             />
           </div>
         </div>
-        <p
+        <div
           data-aos="fade-down"
           className="text24 mt24 lg:w-[36.4583333333vw] mx-[auto]"
-        >
-          نحن نعمل على تحسين الكفاءة والجودة في عمليات التجميع، والفرز، وتطوير
-          عمليات إعادة التدوير المبتكرة للمواد المجمعة و نسعى لتعزيز التعاون مع
-          الشركاء، والمجتمعات المحلية، والجهات الحكومية لتعزيز ثقافة إعادة
-          التدوير .
-        </p>
+          dangerouslySetInnerHTML={{ __html: desc }}
+        ></div>
       </div>
     </div>
   );

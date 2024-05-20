@@ -2,15 +2,17 @@ import NewsCard from "@/components/common/NewsCard";
 import Layout from "@/components/layout/Layout";
 import NewsCardsContainer from "@/components/news/NewsCardsContainer";
 import SubHero from "@/components/news/SubHero";
-import Image from "next/image";
-import Link from "next/link";
+import getNewsData from "@/lib/data-hook/getNewsData";
 import React from "react";
 
-const page = () => {
+const page = async () => {
+  const currentPage = 1;
+  const limit = 4;
+  const newsData = await getNewsData(currentPage, limit, "arabic");
   return (
     <Layout deepGreen>
       <SubHero />
-      <NewsCardsContainer />
+      <NewsCardsContainer newsData={newsData} />
     </Layout>
   );
 };

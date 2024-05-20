@@ -1,20 +1,12 @@
-import Form from "@/components/home/form/Form";
-import Hero from "@/components/home/hero/Hero";
-import Mission from "@/components/home/mission/Mission";
-import News from "@/components/home/news/News";
-import Partners from "@/components/home/partners/Partners";
-import Services from "@/components/home/services/Services";
+import HomePage from "@/components/home/Index";
 import Layout from "@/components/layout/Layout";
+import getHomeData from "@/lib/data-hook/getHomeData";
 
-const page = () => {
+const page = async () => {
+  const data = await getHomeData("home", "arabic");
   return (
-    <Layout>
-      <Hero />
-      <Mission />
-      <Services />
-      <Partners />
-      <News />
-      <Form />
+    <Layout arabic>
+      <HomePage data={data?.page} arabic />
     </Layout>
   );
 };

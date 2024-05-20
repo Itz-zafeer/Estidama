@@ -1,15 +1,21 @@
-import React from "react";
-import Category from "./Category";
-import Categories from "./Categories";
+import ServiceItems from "./ServiceItems";
 
-const Content = ({ categories, handelActive, handelActiveCategory }) => {
+const Content = ({
+  serviceItems,
+  content,
+  currentCategoryIndex,
+  handleCategoryIndex
+}) => {
   return (
     <div data-aos="fade-up" className="lg:w-[34.375vw]">
-      <h2 className="text60 f700">خدماتنا</h2>
-      <Categories
-        categories={categories}
-        handelActive={handelActive}
-        handelActiveCategory={handelActiveCategory}
+      <h2
+        className="text60 f700"
+        dangerouslySetInnerHTML={{ __html: content?.title }}
+      ></h2>
+      <ServiceItems
+        serviceItems={serviceItems}
+        currentCategoryIndex={currentCategoryIndex}
+        handleCategoryIndex={handleCategoryIndex}
       />
     </div>
   );

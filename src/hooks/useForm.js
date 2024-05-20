@@ -1,19 +1,59 @@
-import { validateEmail } from "@/app/utils/validateEmail";
-import React, { useEffect, useState } from "react";
+import postForm from "@/utils/postForm";
+import React, { useEffect, useRef, useState } from "react";
+function scrollToElementById(id, offset) {
+  const element = document.getElementById(id);
+  setTimeout(() => {
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (offset) {
+        // Calculate the final scroll position
+        const scrollTop =
+          element.getBoundingClientRect().top + window.pageYOffset - offset;
+        // Scroll to the adjusted position
+        window.scrollTo({ top: scrollTop, behavior: "smooth" });
+      }
+    }
+  }, 100);
+}
 
-const useForm = (inputFieldsData) => {
+const validateEmail = (email) => {
+  // Regular expression for validating an email address
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // Test the email against the regular expression
+  return emailRegex.test(email);
+};
+
+const useForm = (inputFieldsData, endpoint, arabic) => {
   const [states, setStates] = useState({});
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const captchaRef = useRef(null);
+  const [isVerified, setIsVerified] = useState(false);
+  const [captchaError, setCaptchaError] = useState(false);
+
+  const handleRecaptchaChange = (token) => {
+    // This callback will be called when the user verifies the CAPTCHA
+    setIsVerified(true);
+  };
+  const resetForm = () => {
     const newStates = {};
     inputFieldsData?.forEach((item) => {
       newStates[item.id] = "";
     });
     setStates(newStates);
     setErrors(newStates);
+    setCaptchaError(false);
+    setIsVerified(false);
+    captchaRef?.current?.reset();
+    setTimeout(() => {
+      setStatus("");
+    }, 8000);
+  };
+  useEffect(() => {
+    resetForm();
   }, []);
 
   const handleChange = (e) => {
@@ -22,19 +62,26 @@ const useForm = (inputFieldsData) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     let isError = false;
-    setIsLoading(true);
+    const headerHeight = document.querySelector("header").offsetHeight;
 
     Object.keys(states).forEach((key, index) => {
       if (!states[key] && inputFieldsData[index]?.required) {
-        newErrors[key] = "This Field is Required";
-        isError = true;
+        newErrors[key] = arabic ? "هذا الحقل مطلوب" : "This Field is Required";
+        if (!isError) {
+          isError = true;
+          // errorElement
+          console.log(inputFieldsData[index]);
+          scrollToElementById(inputFieldsData[index]?.id, headerHeight);
+        }
       } else if (key.toLowerCase().includes("email")) {
         if (!validateEmail(states[key])) {
-          newErrors[key] = "The Email isn't Correct";
+          newErrors[key] = arabic
+            ? "البريد الإلكتروني غير صحيح"
+            : "The Email isn't Correct";
           isError = true;
         }
       }
@@ -44,14 +91,18 @@ const useForm = (inputFieldsData) => {
 
     if (!isError) {
       if (isVerified) {
-        setTimeout(() => {
-          setIsLoading(false);
+        setIsLoading(true);
+        const res = await postForm(states, endpoint);
+        if (res?.status == 200) {
           setStatus("success");
-          //For testing ERror
-          // setStatus("failed");
-        }, 1500);
+        } else {
+          setStatus("failed");
+        }
+        setIsLoading(false);
+
+        resetForm();
       } else {
-        // setCaptchaError(true);
+        setCaptchaError(true);
       }
     }
   };
@@ -66,7 +117,10 @@ const useForm = (inputFieldsData) => {
     isLoading,
     setIsLoading,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    captchaRef,
+    captchaError,
+    handleRecaptchaChange
   };
 };
 
