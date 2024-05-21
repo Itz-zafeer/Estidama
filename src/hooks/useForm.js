@@ -78,7 +78,6 @@ const useForm = ({ inputFieldsData, endpoint, arabic, errorMessages }) => {
         if (!isError) {
           isError = true;
           // errorElement
-          console.log(inputFieldsData[index]);
           scrollToElementById(inputFieldsData[index]?.id, headerHeight);
         }
       } else if (key.toLowerCase().includes("email")) {
@@ -107,7 +106,9 @@ const useForm = ({ inputFieldsData, endpoint, arabic, errorMessages }) => {
 
         resetForm();
       } else {
-        setCaptchaError(true);
+        setCaptchaError(
+          checkIfContentExist(errorMessages?.requiredError, "Required")
+        );
       }
     }
   };

@@ -15,7 +15,7 @@ export const newsPageQuery = () => {
           seo_keywords
         }
       }
-      globalSet(handle: "global_settings", site: "english") {
+      globalSet(handle: "global_settings", site: $site) {
         ... on GlobalSet_GlobalSettings {
           seo_title
           seo_description

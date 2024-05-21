@@ -17,8 +17,8 @@ const handelSubmit = (e) => {
 const NewsLetter = ({ translations }) => {
   const { email, handleSubmit, handleChange, formRef, error } = useNewsLetter({
     errors: {
-      email: translations?.emailError,
-      required: translations?.requiredError
+      email: translations?.newsletter_emailError,
+      required: translations?.newsletter_requiredError
     }
   });
   return (
@@ -30,7 +30,6 @@ const NewsLetter = ({ translations }) => {
         if (status == "success") {
           setEmail("");
         }
-        console.log(status);
         return (
           <form
             ref={formRef}
@@ -49,7 +48,7 @@ const NewsLetter = ({ translations }) => {
                   disabled={status == "success"}
                   type="text"
                   className="w-full outline-none bg-transparent text18 placeholder:text18 placeholder:f700 text-white placeholder:text-white"
-                  placeholder={translations?.placeholder}
+                  placeholder={translations?.newsletter_placeholder}
                 />
               </div>
               {error && (
@@ -59,12 +58,12 @@ const NewsLetter = ({ translations }) => {
               )}
               {status == "success" && (
                 <span className=" text18 font-[300]  text-green-600  font-[500]">
-                  {translations?.successMessage}
+                  {translations?.newsletter_successMessage}
                 </span>
               )}
               {status == "error" && (
                 <span className=" text18 font-[300]   text-[#D51D5D]">
-                  {translations?.errorMessage}
+                  {translations?.newsletter_errorMessage}
                 </span>
               )}
             </div>
@@ -76,8 +75,8 @@ const NewsLetter = ({ translations }) => {
               }  block uppercase text20 bg-[#132D2B] transition-all duration-300 hover:bg-[#5EBD8E] border100 lg:px-[1.25vw] lg:py-[0.78125vw] py-[8px] px-[20px] sm:py-[10px] sm:px-[25px]`}
             >
               {status == "sending"
-                ? translations?.loadingText
-                : translations?.btnText}
+                ? translations?.newsletter_loadingText
+                : translations?.newsletter_btnText}
             </button>
           </form>
         );

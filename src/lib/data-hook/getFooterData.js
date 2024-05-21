@@ -3,7 +3,7 @@ import { footerQuery } from "../queries/footerQuery.js";
 
 const getFooterData = async (isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default"
+    site: isAr ? "arabic" : "english"
   };
 
   try {

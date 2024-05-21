@@ -32,7 +32,7 @@ const inputFieldsData = [
     required: true
   }
 ];
-const Form = ({ arabic, content, translations }) => {
+const Form = ({ arabic, content, translations, inputFieldsData }) => {
   const {
     isLoading,
     states,
@@ -45,10 +45,13 @@ const Form = ({ arabic, content, translations }) => {
     captchaError,
     handleRecaptchaChange
   } = useForm({
-    inputFieldsData: translations?.inputFieldsData,
+    inputFieldsData: inputFieldsData,
     endpoint: "contact",
     arabic,
-    errorMessages: translations?.errors
+    errorMessages: {
+      emailError: translations?.emailError,
+      requiredError: translations?.requiredError
+    }
   });
 
   return (

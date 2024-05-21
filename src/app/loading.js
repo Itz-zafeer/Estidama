@@ -1,10 +1,10 @@
 const Loading = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-[#042a59]">
+    <div className="w-full h-screen flex items-center justify-center bg-[#132D2B]">
       <div role="status">
         <svg
           aria-hidden="true"
-          className="w-[120px] h-[120px] sm:w-[10vw] sm:h-[10vw]  mr-2 text-[white] animate-spin   fill-[#407EC9]"
+          className="w-[120px] h-[120px] sm:w-[10vw] sm:h-[10vw]  mr-2 text-[white] animate-spin   fill-[#5EBD8E]"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

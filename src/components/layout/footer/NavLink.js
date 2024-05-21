@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
-const NavLink = ({ navLink }) => {
-    return (
-        <li>
-            <Link href='/' className="block">
-                {navLink.text}
-            </Link>
-        </li>
-    )
-}
+const NavLink = ({ navItem }) => {
+  return (
+    <li>
+      <Link href={navItem?.permalink} className="block">
+        {navItem?.title}
+      </Link>
+    </li>
+  );
+};
 
-export default NavLink
+export default NavLink;

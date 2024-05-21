@@ -1,56 +1,27 @@
 export const translations = {
   layout: {
-    header: {
-      languageSwitch: "EN"
-    },
-    footer: {
-      copyrightRichText: ` © 2024 حقوق الطبع والنشر واسكو جميع الحقوق محفوظةتم تطويره بواسطة {" "}
-        <a href="https://brackets-tech.com/" target="_blank">
-          Brackets Technology
-        </a>`,
-      textBelowLogo: `نرشد الجهات طوعيًا بتوفير تغليف قابل لإعادة الاستخدام مثل أكواب أكياس... وغيرها.`,
-      newsletter: {
-        title: "اتبع النشرة الإخبارية لدينا",
-        placeholder: "البريد الإلكتروني  ",
-        requiredError: "This Field is Required!",
-        emailError: "Email isn't Valid!",
-        successMessage: " Thank You! You have Successfully Subscribed!",
-        errorMessage: " Something went wrong!",
-        loadingText: "Sending...",
-        btnText: "   اشترك "
-      }
-    }
+    languageSwitch: "EN",
+    copyrightText:
+      " 2024 حقوق الطبع والنشر واسكو جميع الحقوق محفوظةتم تطويره بواسطة  Brackets Technology",
+    textBelowLogo: `نرشد الجهات طوعيًا بتوفير تغليف قابل لإعادة الاستخدام مثل أكواب أكياس... وغيرها.`,
+    newsletter_title: "اتبع النشرة الإخبارية لدينا",
+    newsletter_placeholder: "البريد الإلكتروني  ",
+    newsletter_requiredError: "This Field is Required!",
+    newsletter_emailError: "Email isn't Valid!",
+    newsletter_successMessage: " Thank You! You have Successfully Subscribed!",
+    newsletter_errorMessage: " Something went wrong!",
+    newsletter_loadingText: "Sending...",
+    newsletter_btnText: "   اشترك "
   },
   form: {
-    inputFieldsData: [
-      {
-        type: "text",
-        placeholder: "الأسم *",
-        id: "name",
-        required: true
-      },
-      {
-        type: "text",
-        placeholder: "البريد الإلكتروني  *",
-        id: "email",
-        required: true
-      },
-      {
-        type: "text",
-        placeholder: "موضوع",
-        id: "subject"
-      },
-      {
-        type: "text",
-        placeholder: "رسالتك *",
-        id: "message",
-        required: true
-      }
-    ],
-    errors: {
-      emailError: "This Field is Required",
-      requiredError: "The Email isn't Correct"
-    },
+    name_placeholder: "الأسم *",
+    email_placeholder: "البريد الإلكتروني  *",
+    message_placeholder: "رسالتك *",
+    subject_placeholder: "موضوع",
+
+    requiredError: "This Field is Required",
+    emailError: "The Email isn't Correct",
+
     successMessage: "your form has been submitted",
     errorMessage: " Something went wrong! please try again"
   }

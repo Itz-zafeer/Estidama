@@ -1,42 +1,13 @@
-import React from 'react'
-import NavLink from './NavLink'
-const navLinks = [
-    {
-        link: '',
-        text: "الصفحة الرئيسية",
-    },
-    {
-        link: '',
-        text: "من نحن",
-    },
-    {
-        link: '',
-        text: "خدماتنا",
-    },
-    {
-        link: '',
-        text: "شركاؤنا",
-    },
-    {
-        link: '',
-        text: "اخر الاخبار",
-    },
-]
-const NavLinks = () => {
-    return (
-        <ul className='listHover text20 text-[#FFFFFF] flex items-center lg:gap-x-[2.91666666667vw] gap-x-[50px] flex-wrap gap-y-[10px]'>
-            {
-                navLinks.map((navLink, i) => (
-                    <NavLink
-                        navLink={navLink}
-                        key={i}
+import React from "react";
+import NavLink from "./NavLink";
+const NavLinks = ({ navItems }) => {
+  return (
+    <ul className="listHover text20 text-[#FFFFFF] flex items-center lg:gap-x-[2.91666666667vw] gap-x-[50px] flex-wrap gap-y-[10px]">
+      {navItems.map((navItem, i) => (
+        <NavLink navItem={navItem?.page} key={i} />
+      ))}
+    </ul>
+  );
+};
 
-                    />
-                ))
-            }
-
-        </ul>
-    )
-}
-
-export default NavLinks
+export default NavLinks;

@@ -3,52 +3,36 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const NewsCard = ({ bigCard, content, arabic }) => {
+const NewsCardSkelton = () => {
   return (
     <div
       data-aos="fade"
       className="flex flex-wrap  sm:gap-y-[25px] gap-y-[20px] items-center lg:gap-x-[2.08333333333vw]"
     >
-      <Link
-        className={`relative ${
-          bigCard
-            ? "lg:w-[27.0833333333vw] lg:h-[24.375vw]"
-            : "lg:w-[19.7916666667vw] lg:h-[17.8125vw]"
-        } sm:w-[70%] w-full h-[250px] sm:h-[350px]`}
-        href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
+      <div
+        className={`relative animate-pulse lg:w-[19.7916666667vw] lg:h-[17.8125vw] sm:w-[70%] w-full h-[250px] sm:h-[350px]`}
       >
-        {content?.news_image?.src && (
-          <Image
-            fill
-            src={content?.news_image?.src}
-            alt={checkIfContentExist(
-              content?.news_image?.src,
-              content?.title,
-              "News"
-            )}
-            className="border20 object-cover"
-          />
-        )}
         <span className="atlwhFull border20 bg-[#132D2B33]"></span>
-      </Link>
+      </div>
       <div className="lg:w-[19.7916666667vw] w-full">
-        <span className="text18">{content?.date}</span>
-        <h4 className="text29 f700 mt12 line-clamp-2 lg:h-[3.75vw]">
-          {content?.title}
-        </h4>
-        <div
-          className="text22 text-[#132D2B] mt16 line-clamp-[5] lg:h-[6.77083333333vw] text-opacity-[0.7]"
-          dangerouslySetInnerHTML={{
-            __html: content?.news_description_with_html
-          }}
-        ></div>
-        <Link
-          href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
-          className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
-        >
-          <span className="text24 ">
-            {arabic ? "اقرا المزيد" : "Read More"}
+        <span className="text18 bg-[#132D2B33] text-[red] border20 animate-pulse text-opacity-0">
+          lorem lorem lorem
+        </span>
+        <h4 className="text26 f700 mt12     flex gap-y-[0.5vw] flex-col">
+          <span className="bg-[#132D2B33] text-[red] border20 animate-pulse text-opacity-0">
+            lorem lorem lorem lorem
           </span>
+          <span className="bg-[#132D2B33] text-[red] border20 animate-pulse text-opacity-0">
+            lorem lorem lorem
+          </span>
+        </h4>
+        <div className="text22 text-[#132D2B] mt16 line-clamp-[5] lg:h-[6.77083333333vw] bg-[#132D2B33] text-[red] border20 animate-pulse text-opacity-0">
+          lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+          lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+          lorem lorem lorem lorem lorem lorem lorem lorem
+        </div>
+        <div className="   mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px] bg-[#132D2B33] text-[red] border20 animate-pulse text-opacity-0">
+          <span className="text24 ">{"Read More"}</span>
           <svg
             width="24"
             height="25"
@@ -64,10 +48,10 @@ const NewsCard = ({ bigCard, content, arabic }) => {
               fill="#5EBD8E"
             />
           </svg>
-        </Link>
+        </div>
       </div>
     </div>
   );
 };
 
-export default NewsCard;
+export default NewsCardSkelton;

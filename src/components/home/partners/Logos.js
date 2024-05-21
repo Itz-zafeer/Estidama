@@ -7,7 +7,6 @@ import React from "react";
 import Image from "next/image";
 
 const Logos = ({ logos }) => {
-  console.log(logos);
   const [swiperGap, setSwiperGap] = useState(0);
   const [isMobile, setIsMobile] = useState(true);
   useEffect(() => {

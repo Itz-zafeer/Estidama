@@ -1,50 +1,64 @@
-import React from "react";
+"use client";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import NewsCard from "../common/NewsCard";
 import Pagination from "./pagination/Pagination";
-// const newsData = [
-//   {
-//     date: "يناير 21, 2024",
-//     heading: "نحن معك في رحلتك نحو صفر نفايات (Zero Waste)",
-//     text: "تتنامى أعداد شركاء النجاح الذين يعملون معنا في المملكة العربية السعودية، وبكل فخر جميع شركاؤنا مستمرون معنا في شراكاتهم. لماذا؟ ملتزمون بالتميز في تقديم خدماتنا. ",
-//     link: "/single-news",
-//     lintText: "اقرا المزيد",
-//     img: "/images/news/1.jpg"
-//   },
-//   {
-//     date: "يناير 21, 2024",
-//     heading: "نكتشف الحلول لأجل مستقبل أخضر",
-//     text: "تتنامى أعداد شركاء النجاح الذين يعملون معنا في المملكة العربية السعودية، وبكل فخر جميع شركاؤنا مستمرون معنا في شراكاتهم. لماذا؟ ملتزمون بالتميز في تقديم خدماتنا. ",
-//     link: "/single-news",
-//     lintText: "اقرا المزيد",
-//     img: "/images/news/2.jpg"
-//   },
-//   {
-//     date: "يناير 21, 2024",
-//     heading: "نكتشف الحلول لأجل مستقبل أخضر",
-//     text: "تتنامى أعداد شركاء النجاح الذين يعملون معنا في المملكة العربية السعودية، وبكل فخر جميع شركاؤنا مستمرون معنا في شراكاتهم. لماذا؟ ملتزمون بالتميز في تقديم خدماتنا. ",
-//     link: "/single-news",
-//     lintText: "اقرا المزيد",
-//     img: "/images/news/3.jpg"
-//   },
-//   {
-//     date: "يناير 21, 2024",
-//     heading: "ابدأ بتطوير إدارة النفايات مع استدامة",
-//     text: "تتنامى أعداد شركاء النجاح الذين يعملون معنا في المملكة العربية السعودية، وبكل فخر جميع شركاؤنا مستمرون معنا في شراكاتهم. لماذا؟ ملتزمون بالتميز في تقديم خدماتنا. ",
-//     link: "/single-news",
-//     lintText: "اقرا المزيد",
-//     img: "/images/news/4.jpg"
-//   }
-// ];
-const NewsCardsContainer = ({ newsData }) => {
+import NewsCardSkelton from "../common/NewsCardSkelton";
+import getNewsUsingAxios from "@/lib/data-hook/getNewsUsingAxios";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+function useSkipFirstRenderEffect(effect, deps) {
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (!isFirstRender.current) {
+      effect();
+    } else {
+      isFirstRender.current = false;
+    }
+  }, deps);
+}
+
+const NewsCardsContainer = ({ newsData, currentPage, lastPage, arabic }) => {
+  const [currentPageNumber, setCurrentPageNumber] = useState(currentPage);
+  const [lastPageNumber, setLastPageNumber] = useState(lastPage);
+  const [news, setNews] = useState(newsData?.entries?.data);
+  const [isLoading, setIsloading] = useState(false);
+
+  const updateData = async () => {
+    setIsloading(true);
+
+    const url = new URL(window.location.href);
+
+    // Set or update the query parameter
+    url.searchParams.set("pageNumber", currentPageNumber);
+
+    // Use history.pushState to update the URL in the address bar without reloading the page
+    history.pushState(null, "", url.toString());
+
+    const { data } = await getNewsUsingAxios(currentPageNumber, arabic);
+    setNews(data?.data?.entries?.data);
+    setIsloading(false);
+  };
+
+  useSkipFirstRenderEffect(() => {
+    updateData();
+  }, [currentPageNumber]);
+
   return (
     <section>
       <div className="Container1640 pb220">
         <div className="mt56  flex flex-wrap sm:gap-[40px] gap-[30px] lg:gap-[2.08333333333vw] items-center">
-          {newsData?.entries?.data?.map((newsItem, i) => (
-            <NewsCard key={i} content={newsItem} />
-          ))}
+          {isLoading
+            ? [1, 2, 3, 4].map((item) => <NewsCardSkelton key={item} />)
+            : news?.map((newsItem, i) => (
+                <NewsCard key={i} content={newsItem} arabic={arabic} />
+              ))}
         </div>
-        {/* <Pagination /> */}
+        <Pagination
+          currentPage={currentPageNumber}
+          lastPage={lastPageNumber}
+          setCurrentPageNumber={setCurrentPageNumber}
+        />
       </div>
     </section>
   );

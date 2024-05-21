@@ -1,16 +1,15 @@
 import { getClient } from "../client";
-import { newsQuery } from "../queries/newsQuery.js";
+import { newsQueryGQL } from "../queries/newsQueryGQL.js";
 
-const getNewsData = async (current_page, limit, isAr) => {
+const getNewsData = async (current_page, isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default",
-    current_page,
-    limit
+    site: isAr ? "arabic" : "english",
+    current_page: current_page,
+    limit: 4
   };
-
   try {
     const { data } = await getClient().query({
-      query: newsQuery(),
+      query: newsQueryGQL(),
       variables
     });
     return data;

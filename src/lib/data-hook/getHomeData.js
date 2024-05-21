@@ -3,7 +3,7 @@ import { homeQuery } from "../queries/homeQuery.js";
 
 const getHomeData = async (slug, isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default",
+    site: isAr ? "arabic" : "english",
     slug
   };
 

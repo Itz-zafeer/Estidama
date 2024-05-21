@@ -3,7 +3,7 @@ import { singleNewsQuery } from "../queries/singleNewsQuery.js";
 
 const getSingleNewsData = async (slug, isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default",
+    site: isAr ? "arabic" : "english",
     slug
   };
 

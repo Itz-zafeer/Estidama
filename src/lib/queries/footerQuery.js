@@ -21,6 +21,21 @@ export const footerQuery = () => {
           }
         }
       }
+      globalSet(handle: "global_settings", site: $site) {
+        ... on GlobalSet_GlobalSettings {
+          social_icons {
+            ... on Set_SocialIcons_NewSet {
+              social_icon {
+                extension
+                permalink
+              }
+              social_link
+              social_link_text
+              social_external_link
+            }
+          }
+        }
+      }
     }
   `;
   return query;

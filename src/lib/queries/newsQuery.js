@@ -1,7 +1,4 @@
-const { gql } = require("@apollo/client");
-
-export const newsQuery = () => {
-  const query = gql`
+export const newsQuery = `
     query Entries($site: String!, $current_page: Int!, $limit: Int!) {
       entries(
         collection: "news"
@@ -31,5 +28,3 @@ export const newsQuery = () => {
       }
     }
   `;
-  return query;
-};

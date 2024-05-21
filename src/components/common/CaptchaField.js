@@ -17,7 +17,7 @@ const CaptchaField = ({
       />
       {captchaError && (
         <span className="text20 text-red-600 errorElement  absolute bottom-[-30px] md:bottom-[-2.2vw]">
-          This Field is Required
+          {captchaError}
         </span>
       )}
     </div>

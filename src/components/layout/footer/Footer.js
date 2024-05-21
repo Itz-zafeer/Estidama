@@ -8,7 +8,7 @@ import NavLinks from "./NavLinks";
 import Copyright from "./Copyright";
 import checkIfContentExist from "@/utils/setAltTag";
 
-const Footer = ({ translations }) => {
+const Footer = ({ translations, navItems, socialIconsData }) => {
   return (
     <footer>
       <div className="bg-[#3A8873]">
@@ -24,19 +24,19 @@ const Footer = ({ translations }) => {
               {translations?.textBelowLogo}{" "}
             </p>
           </div>
-          <NavLinks />
+          <NavLinks navItems={navItems} />
 
           <div>
             <h5 className="text20 f700 text-white">
-              {translations?.newsletter?.title}
-              <NewsLetter translations={translations?.newsletter} />
-              <SocialIcons />
+              {translations?.newsletter_title}
+              <NewsLetter translations={translations} />
+              <SocialIcons socialIconsData={socialIconsData} />
             </h5>
           </div>
         </div>
       </div>
       <Copyright
-        translations={checkIfContentExist(translations?.copyrightRichText)}
+        translations={checkIfContentExist(translations?.copyrightText)}
       />
     </footer>
   );

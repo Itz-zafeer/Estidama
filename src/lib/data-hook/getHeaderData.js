@@ -3,7 +3,7 @@ import { headerQuery } from "../queries/headerQuery";
 
 const getHeaderData = async (isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default"
+    site: isAr ? "arabic" : "english"
   };
 
   try {

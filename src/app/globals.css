@@ -235,9 +235,16 @@ header.fixedHeader > div {
   pointer-events: initial;
 }
 
-.pagination svg.active,
-.pagination svg:hover {
-  opacity: 1;
+.pagination svg rect,
+.pagination svg path {
+  transition: 0.3s all;
+}
+.pagination svg:hover rect,
+.pagination svg:hover path {
+  stroke: #5ebd8e;
+}
+.pagination svg:hover path {
+  fill: #5ebd8e;
 }
 .pagination .numbers:hover,
 .pagination .numbers.active {

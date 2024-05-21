@@ -3,7 +3,7 @@ import { newsPageQuery } from "../queries/newsPageQuery.js";
 
 const getNewsPageData = async (slug, isAr) => {
   const variables = {
-    site: isAr ? "arabic" : "default",
+    site: isAr ? "arabic" : "english",
     slug
   };
 

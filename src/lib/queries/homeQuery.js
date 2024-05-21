@@ -89,7 +89,7 @@ export const homeQuery = () => {
           contact_description
         }
       }
-      globalSet(handle: "global_settings", site: "english") {
+      globalSet(handle: "global_settings", site: $site) {
         ... on GlobalSet_GlobalSettings {
           seo_title
           seo_description

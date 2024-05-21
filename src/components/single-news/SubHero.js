@@ -26,12 +26,7 @@ const SubHero = ({ title }) => {
         href="/"
         className="relative block lg:w-[3.4375vw] lg:h-[3.4375vw] sm:w-[55px] sm:h-[55px] w-[45px] h-[45px]"
       >
-        <Image
-          fill
-          src="/images/icons/share.svg"
-          alt="share"
-          className="flipped"
-        />
+        <Image fill src="/images/icons/share.svg" alt="share" className="" />
       </Link>
     </div>
   );

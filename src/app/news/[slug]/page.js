@@ -1,6 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import SubHero from "@/components/single-news/SubHero";
 import getSingleNewsData from "@/lib/data-hook/getSingleNewsData";
+import { translations } from "@/translations";
 import getMetaData from "@/utils/getMetaData";
 import checkIfContentExist from "@/utils/setAltTag";
 import Image from "next/image";
@@ -13,9 +14,9 @@ export async function generateMetadata({ params }, parent) {
 const page = async ({ params }) => {
   const slug = params.slug;
   const data = await getSingleNewsData(slug, "arabic");
-  console.log(data);
+  const translationsData = translations;
   return (
-    <Layout deepGreen arabic>
+    <Layout deepGreen arabic translations={translationsData?.layout}>
       <div className=" Container1640 pb220 lg:w-[70.8333333333vw] lg:pt-[17.2916666667vw] pt-[50vw] sm:pt-[40vw]">
         <SubHero title={checkIfContentExist(data?.entry?.title)} />
         <div className="mt32">

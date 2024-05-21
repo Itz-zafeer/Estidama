@@ -51,6 +51,39 @@ const HomePage = ({ data, arabic, translations }) => {
     title: checkIfContentExist(data?.contact_title_heading),
     desc: checkIfContentExist(data?.contact_description)
   };
+
+  const inputFieldsData = [
+    {
+      type: "text",
+      placeholder: "",
+      id: "name",
+      required: true
+    },
+    {
+      type: "text",
+      placeholder: "",
+      id: "email",
+      required: true
+    },
+    {
+      type: "text",
+      placeholder: "",
+      id: "subject"
+    },
+    {
+      type: "text",
+      placeholder: "",
+      id: "message",
+      required: true
+    }
+  ];
+  Object.keys(translations?.form).forEach((item) => {
+    inputFieldsData.forEach((inputField, index) => {
+      if (item.includes(inputField.id + "_")) {
+        inputFieldsData[index].placeholder = translations?.form[item];
+      }
+    });
+  });
   return (
     <>
       <Hero content={heroContent} arabic={arabic} />
@@ -62,6 +95,7 @@ const HomePage = ({ data, arabic, translations }) => {
         content={formContent}
         arabic={arabic}
         translations={translations?.form}
+        inputFieldsData={inputFieldsData}
       />
     </>
   );
