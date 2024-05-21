@@ -55,7 +55,7 @@ const Form = ({ arabic, content, translations, inputFieldsData }) => {
   });
 
   return (
-    <section id="contact">
+    <section id="contactSection">
       <div className="Container1640 pb220 relative">
         <div className="lg:w-[42.1875vw] w-full mx-[auto]">
           <Content title={content?.title} desc={content?.desc} />

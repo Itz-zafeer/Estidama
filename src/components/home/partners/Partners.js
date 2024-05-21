@@ -5,7 +5,7 @@ import Logos from "./Logos";
 const Partners = ({ content }) => {
   return (
     <section
-      id="partners"
+      id="partnersSection"
       className="lg:pt-[11.4583333333vw] pt-[80px] sm:pt-[120px]"
     >
       <div className="Container1640">

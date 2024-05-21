@@ -7,7 +7,7 @@ import SkipSection from "./SkipSection";
 const Hero = ({ content }) => {
   return (
     <section
-      id="hero"
+      id="heroSection"
       className="h-screen w-full relative flex justify-center items-end lg:pb-[12.2916666667vw] sm:pb-[30vw] pb-[40vw]"
     >
       <div className="atlwhFull overflow-hidden">

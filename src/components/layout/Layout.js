@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "./Header";
+// import Header from "./Header";
 import Footer from "./footer/Footer";
 import getHeaderData from "@/lib/data-hook/getHeaderData";
 import getFooterData from "@/lib/data-hook/getFooterData";
+import Header from "./Header2";
 
 const Layout = async ({ children, deepGreen, arabic, translations }) => {
   const headerData = await getHeaderData(arabic);

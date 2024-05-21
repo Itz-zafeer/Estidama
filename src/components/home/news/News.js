@@ -5,7 +5,7 @@ import SmallCards from "./SmallCards";
 
 const News = ({ content, arabic }) => {
   return (
-    <section id="news">
+    <section id="newsSection">
       <div className="Container1640 py220 ">
         <Content
           tagline={content?.tagline}

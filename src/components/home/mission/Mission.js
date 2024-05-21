@@ -4,7 +4,7 @@ import Content from "./Content";
 
 const Mission = ({ content }) => {
   return (
-    <section id="about">
+    <section id="aboutSection">
       <div className="Container1640 flex items-center flex-wrap lg:gap-x-[4.63541666667vw] sm:gap-y-[40px] gap-y-[30px] lg:pt-[13.5416666667vw] pt220">
         <BannerImg src={content?.img?.src} alt={content?.img?.alt} />
         <Content
