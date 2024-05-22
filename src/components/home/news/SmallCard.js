@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import checkIfContentExist from "@/utils/setAltTag";
+import { formatDate } from "@/components/common/NewsCard";
 
 const SmallCard = ({ content, delay, arabic }) => {
   return (
@@ -29,7 +30,7 @@ const SmallCard = ({ content, delay, arabic }) => {
         <span className="atlwhFull border20 bg-[#132D2B33]"></span>
       </Link>
       <div className="lg:w-[19.7916666667vw]  ">
-        <span className="text18">{content?.date}</span>
+        <span className="text18">{formatDate(content?.date, arabic)}</span>
         <h4 className="text29 mt12 f700 line-clamp-2 lg:h-[3.75vw]">
           {content?.title}
         </h4>
