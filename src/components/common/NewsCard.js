@@ -19,6 +19,23 @@ export const formatDate = (dateStr, isAr) => {
   const enOptions = { year: "numeric", month: "long", day: "2-digit" };
   const arOptions = { year: "numeric", month: "long", day: "2-digit" };
 
+  // Helper function to convert Arabic numerals to English
+  const convertArabicNumeralsToEnglish = (str) => {
+    const arabicToEnglishMap = {
+      "٠": "0",
+      "١": "1",
+      "٢": "2",
+      "٣": "3",
+      "٤": "4",
+      "٥": "5",
+      "٦": "6",
+      "٧": "7",
+      "٨": "8",
+      "٩": "9"
+    };
+    return str.replace(/[٠-٩]/g, (d) => arabicToEnglishMap[d]);
+  };
+
   if (isAr) {
     // Format date for Arabic locale with English format
     const formattedDate = date.toLocaleDateString("en-US", enOptions);
@@ -38,7 +55,10 @@ export const formatDate = (dateStr, isAr) => {
       November: "نوفمبر",
       December: "ديسمبر"
     };
-    return `${arabicMonthNames[monthName]} ${dayEn}, ${yearEn}`;
+    return `${arabicMonthNames[monthName]} ${dayEn.padStart(
+      2,
+      "0"
+    )}, ${yearEn}`;
   } else {
     // Format date for English locale with Arabic format
     const formattedDate = date.toLocaleDateString("ar-EG", arOptions);
@@ -58,9 +78,9 @@ export const formatDate = (dateStr, isAr) => {
       نوفمبر: "November",
       ديسمبر: "December"
     };
-    return `${dayAr.padStart(2, "0")} ${
-      englishMonthNames[monthNameAr]
-    } ${yearAr}`;
+    const englishDay = convertArabicNumeralsToEnglish(dayAr.padStart(2, "0"));
+    const englishYear = convertArabicNumeralsToEnglish(yearAr);
+    return `${englishDay} ${englishMonthNames[monthNameAr]} ${englishYear}`;
   }
 };
 
