@@ -1,3 +1,4 @@
+import { formatDate } from "@/components/common/NewsCard";
 import Layout from "@/components/layout/Layout";
 import SubHero from "@/components/single-news/SubHero";
 import getSingleNewsData from "@/lib/data-hook/getSingleNewsData";
@@ -9,7 +10,7 @@ import React from "react";
 
 export const revalidate = 5;
 export async function generateMetadata({ params }, parent) {
-  const data = await getSingleNewsData(params.slug, "arabic");
+  const data = await getSingleNewsData(params.slug);
   return await getMetaData({
     slug: params.slug,
     isAr: false,
@@ -19,9 +20,8 @@ export async function generateMetadata({ params }, parent) {
 const page = async ({ params }) => {
   const slug = params.slug;
   const data = await getSingleNewsData(slug);
-  const translationsData = translations;
   return (
-    <Layout deepGreen translations={translationsData?.layout}>
+    <Layout deepGreen>
       <div className=" Container1640 pb220 lg:w-[70.8333333333vw] lg:pt-[17.2916666667vw] pt-[50vw] sm:pt-[40vw]">
         <SubHero title={checkIfContentExist(data?.entry?.title)} />
         <div className="mt32">

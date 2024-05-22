@@ -15,7 +15,7 @@ const page = async () => {
   const data = await getHomeData("home");
   const translationsData = await getTranslationsData();
   return (
-    <Layout translations={translationsData?.layout}>
+    <Layout>
       <HomePage
         data={data?.page}
         translations={translationsData.translations}

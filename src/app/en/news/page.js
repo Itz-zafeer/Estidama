@@ -18,9 +18,8 @@ const page = async ({ searchParams }) => {
   const currentPage = +checkIfContentExist(searchParams?.pageNumber, 1);
   const newsData = await getNewsData(currentPage, "");
   const pageData = await getData("news", "");
-  const translationsData = translations;
   return (
-    <Layout deepGreen translations={translationsData?.layout}>
+    <Layout deepGreen>
       <SubHero
         title={pageData?.page?.news_title_heading}
         desc={pageData.page?.news_description}

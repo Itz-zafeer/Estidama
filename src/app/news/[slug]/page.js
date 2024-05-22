@@ -20,9 +20,8 @@ export async function generateMetadata({ params }, parent) {
 const page = async ({ params }) => {
   const slug = params.slug;
   const data = await getSingleNewsData(slug, "arabic");
-  const translationsData = translations;
   return (
-    <Layout deepGreen arabic translations={translationsData?.layout}>
+    <Layout deepGreen arabic>
       <div className=" Container1640 pb220 lg:w-[70.8333333333vw] lg:pt-[17.2916666667vw] pt-[50vw] sm:pt-[40vw]">
         <SubHero
           arabic
