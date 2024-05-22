@@ -6,10 +6,11 @@ import getFooterData from "@/lib/data-hook/getFooterData";
 import Header from "./Header2";
 import getTranslationsData from "@/lib/data-hook/getTranslationsData";
 
-const Layout = async ({ children, deepGreen, arabic, translations }) => {
+const Layout = async ({ children, deepGreen, arabic }) => {
   const headerData = await getHeaderData(arabic);
   const footerData = await getFooterData(arabic);
-  // const translationsData = await getTranslationsData(arabic);
+  const translationsData = await getTranslationsData(arabic);
+  const translations = translationsData.translations.layout;
   const socialIconsData = footerData?.globalSet?.social_icons;
   const formattedHeaderData = [];
   headerData?.main_nav?.tree.forEach(({ page }) => {
@@ -18,7 +19,7 @@ const Layout = async ({ children, deepGreen, arabic, translations }) => {
       id: page?.permalink.replace("#", "") + "Section"
     });
   });
-  // console.log(translationsData);
+  console.log(translationsData.translations.layout);
   return (
     <>
       <Header

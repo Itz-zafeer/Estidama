@@ -1,6 +1,7 @@
 import HomePage from "@/components/home/Index";
 import Layout from "@/components/layout/Layout";
 import getHomeData from "@/lib/data-hook/getHomeData";
+import getTranslationsData from "@/lib/data-hook/getTranslationsData";
 import { translations } from "@/translations";
 import getMetaData from "@/utils/getMetaData";
 
@@ -12,10 +13,13 @@ export async function generateMetadata({ params }, parent) {
 
 const page = async () => {
   const data = await getHomeData("home");
-  const translationsData = translations;
+  const translationsData = await getTranslationsData();
   return (
     <Layout translations={translationsData?.layout}>
-      <HomePage data={data?.page} translations={translationsData} />
+      <HomePage
+        data={data?.page}
+        translations={translationsData.translations}
+      />
     </Layout>
   );
 };
