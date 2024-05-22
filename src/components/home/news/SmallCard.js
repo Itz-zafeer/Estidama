@@ -8,7 +8,7 @@ const SmallCard = ({ content, delay, arabic }) => {
     <div
       data-aos="fade"
       data-aos-delay={delay ? delay : 0}
-      className="flex flex-wrap sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
+      className="flex flex-wrap w-full lg:w-[unset] sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
     >
       <Link
         href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
