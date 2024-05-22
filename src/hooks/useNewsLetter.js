@@ -31,6 +31,7 @@ const useNewsLetter = ({ errors }) => {
     handleChange,
     handleSubmit,
     email,
+    setEmail,
     formRef,
     error
   };

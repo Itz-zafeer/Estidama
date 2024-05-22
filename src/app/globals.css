@@ -290,11 +290,14 @@ header.fixedHeader > div {
 .swiper-button-prev {
   @apply md:w-[2.96875vw] md:h-[2.96875vw] top-[unset] bottom-0;
 }
-
+.service-category {
+  @apply transition-all duration-[1s];
+}
 .service-category:before {
   @apply content-[""] w-[0] h-[3px] lg:h-[0.15625vw] bg-[#5EBD8E] absolute bottom-0 transition-all duration-[5s] ease-linear;
 }
-.service-category.active::before {
+.service-category.active::before,
+.service-category.service-aniamtion::before {
   @apply w-full;
 }
 .rtl .service-category::before {
@@ -303,7 +306,12 @@ header.fixedHeader > div {
 .ltr .service-category::before {
   @apply left-0;
 }
-
+/* .imgHover {
+  @apply group overflow-hidden;
+}
+.imgHover img {
+  @apply transition-all duration-300 transform group-hover:scale-[1.05];
+} */
 /* News STart */
 
 .news__Content ul li::before {
@@ -376,6 +384,12 @@ header.fixedHeader > div {
 
 /* News End */
 
+.relativeImportant {
+  position: relative !important;
+}
+.socialConteiner.active {
+  width: 100%;
+}
 /* MEDIA QUERIES  */
 
 @media (min-width: 1024px) {
@@ -431,3 +445,21 @@ header.fixedHeader > div {
 }
 
 /* MEDIA QUERIES  */
+
+/* Add this CSS to your styles */
+.header {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.header.myFixed {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.header.myFixed.visible {
+  opacity: 1;
+  pointer-events: auto;
+}

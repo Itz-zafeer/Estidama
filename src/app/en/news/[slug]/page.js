@@ -33,9 +33,10 @@ const page = async ({ params }) => {
                 className="object-cover border20"
               />
             )}
+            <span className="atlwhFull border20 bg-[#132D2B33]"></span>
           </div>
           <span className="text20 block mt32 lg:mt-[2.08333333333vw]">
-            {data?.entry?.date}
+            {formatDate(data?.entry?.date)}
           </span>
           <div
             className=" news__Content"

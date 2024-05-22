@@ -1,11 +1,11 @@
 import getData from "@/lib/data-hook/getData";
 import getPagesData from "@/lib/data-hook/getPagesData";
 
-const getMetaData = async ({ slug, isAr }) => {
+const getMetaData = async ({ slug, isAr, fetchedData }) => {
   const {
     pages: { data: pagesData }
   } = await getPagesData(isAr);
-  const data = await getData(slug, pagesData, isAr);
+  const data = fetchedData ? fetchedData : await getData(slug, pagesData, isAr);
 
   const pageSeo = data?.page;
   const fallbackSeo = data?.globalSet;

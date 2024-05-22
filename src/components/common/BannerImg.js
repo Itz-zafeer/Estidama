@@ -15,7 +15,7 @@ const BannerImg = ({ src, alt }) => {
           // placeholder="blur"
           src={src}
           alt={alt}
-          className="flipped object-cover border20"
+          className=" object-cover border20"
         />
       )}
       <span className="atlwhFull bg-[#132D2B33]"></span>

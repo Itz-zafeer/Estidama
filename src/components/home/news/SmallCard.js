@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import checkIfContentExist from "@/utils/setAltTag";
 
 const SmallCard = ({ content, delay, arabic }) => {
   return (
@@ -10,21 +11,22 @@ const SmallCard = ({ content, delay, arabic }) => {
       className="flex flex-wrap sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
     >
       <Link
-        href={`${arabic ? "" : "en"}/news/${content?.slug}`}
-        className="relative lg:w-[12.3958333333vw] lg:h-[11.1458333333vw] sm:w-[60%] w-[50%] h-[150px] sm:h-[250px]"
+        href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
+        className="relative lg:w-[12.3958333333vw] border20 group overflow-hidden lg:h-[11.1458333333vw] sm:w-[60%] w-[50%] h-[150px] sm:h-[250px]"
       >
         {content?.news_image?.src && (
           <Image
             fill
             src={content?.news_image?.src}
             alt={checkIfContentExist(
-              content?.news_image?.src,
+              content?.news_image?.alt,
               content?.title,
               "News"
             )}
-            className="border20 object-cover"
+            className="border20 object-cover transition-all duration-300 transform group-hover:scale-[1.1]"
           />
         )}
+        <span className="atlwhFull border20 bg-[#132D2B33]"></span>
       </Link>
       <div className="lg:w-[19.7916666667vw]  ">
         <span className="text18">{content?.date}</span>
@@ -32,8 +34,8 @@ const SmallCard = ({ content, delay, arabic }) => {
           {content?.title}
         </h4>
         <Link
-          href={`${arabic ? "" : "en"}/news/${content?.slug}`}
-          className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
+          href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
+          className="newsLink text-[#5EBD8E] group mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
         >
           <span className="text24 ">
             {arabic ? "اقرا المزيد" : "Read More"}
@@ -41,7 +43,11 @@ const SmallCard = ({ content, delay, arabic }) => {
           <svg
             width="24"
             height="25"
-            className="flipped lg:w-[1.25vw] lg:h-[1.25vw] sm:w-[22px] sm:h-[22px] w-[20px] h-[20px]"
+            className={`flipped lg:w-[1.25vw] lg:h-[1.25vw] sm:w-[22px] sm:h-[22px] w-[20px] h-[20px] ${
+              arabic
+                ? " lg:group-hover:translate-x-[-0.5vw] "
+                : " lg:group-hover:translate-x-[0.5vw] "
+            } transition-all duration-300`}
             viewBox="0 0 24 25"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

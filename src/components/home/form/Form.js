@@ -56,7 +56,7 @@ const Form = ({ arabic, content, translations, inputFieldsData }) => {
 
   return (
     <section id="contactSection">
-      <div className="Container1640 pb220 relative">
+      <div className="Container1640 pb220 pt220 relative">
         <div className="lg:w-[42.1875vw] w-full mx-[auto]">
           <Content title={content?.title} desc={content?.desc} />
           {status && status == "success" ? (
@@ -95,7 +95,7 @@ const Form = ({ arabic, content, translations, inputFieldsData }) => {
             <button
               className={`mt56 mx-[auto] block uppercase text24 ${
                 isLoading ? " pointer-events-none " : " hover:bg-[#132D2B] "
-              } transition-all duration-300 bg-[#5EBD8E] border100 lg:px-[3.02604166667vw] lg:py-[0.52083333333vw] py-[8px] px-[35px] sm:py-[10px] sm:px-[40px] text-white`}
+              } transition-all outline-none duration-300 bg-[#5EBD8E] border100 lg:px-[3.02604166667vw] lg:py-[0.52083333333vw] py-[8px] px-[35px] sm:py-[10px] sm:px-[40px] text-white`}
             >
               {isLoading ? "Loading..." : "      ارسل"}
             </button>

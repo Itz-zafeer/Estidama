@@ -28,6 +28,16 @@ export const singleNewsQuery = () => {
           }
         }
       }
+      globalSet(handle: "global_settings", site: $site) {
+        ... on GlobalSet_GlobalSettings {
+          seo_title
+          seo_description
+          seo_image {
+            src(width: 1200, height: 628)
+          }
+          seo_keywords
+        }
+      }
     }
   `;
   return query;

@@ -11,7 +11,12 @@ import React from "react";
 
 export const revalidate = 5;
 export async function generateMetadata({ params }, parent) {
-  return await getMetaData({ slug: "news" });
+  const data = await getSingleNewsData(params.slug);
+  return await getMetaData({
+    slug: params.slug,
+    isAr: true,
+    fetchedData: data
+  });
 }
 
 const page = async ({ searchParams }) => {

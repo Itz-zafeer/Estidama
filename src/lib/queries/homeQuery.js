@@ -65,6 +65,7 @@ export const homeQuery = () => {
                 extension
                 permalink
               }
+              logos_url
             }
           }
           news_smaller_title_heading

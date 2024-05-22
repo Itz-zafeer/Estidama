@@ -22,7 +22,7 @@ const Content = ({ title, desc, counter1, counter2 }) => {
     let start = 0;
     const end = counter1?.number;
     const end2 = counter2?.number;
-    const duration = 2000; // in milliseconds
+    const duration = 1000; // in milliseconds
     const range = end - start;
     const range2 = end2 - start;
     let startTime = null;
@@ -83,7 +83,7 @@ const Content = ({ title, desc, counter1, counter2 }) => {
         data-aos-delay="400"
         className="flex items-center lg:gap-x-[4.42708333333vw] sm:gap-x-[55px] gap-[10px] flex-wrap lg:mt-[2.08333333333vw] sm:mt-[30px] mt-[20px]"
       >
-        <div>
+        <div className="lg:max-w-[44%]">
           <div className="flex items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]">
             {/* <span className='text100 text-[#5EBD8E]'>٤٠</span> */}
             <span className="text100 text-[#5EBD8E]">{count}</span>
@@ -95,7 +95,7 @@ const Content = ({ title, desc, counter1, counter2 }) => {
             {counter1?.desc}
           </p>
         </div>
-        <div>
+        <div className="lg:max-w-[44%]">
           <div className="flex items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]">
             {/* <span className='text100 text-[#5EBD8E]'>١٩ </span> */}
             <span className="text100 text-[#5EBD8E]">{count2} </span>

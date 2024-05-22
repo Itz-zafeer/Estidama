@@ -36,8 +36,32 @@ const Services = ({ content }) => {
 
   useEffect(() => {
     if (!hasStarted) return;
+    const items = document.querySelectorAll(".service-category");
+
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add("active");
+        items.forEach((it, ind) => {
+          if (ind != index) {
+            it.classList.remove("active");
+          }
+        });
+      }, index * 5000);
+    });
     setCurrentCategoryIndex(1);
+    let indexx = 0;
+    items &&
+      items?.length > 0 &&
+      items[indexx].classList.add("service-aniamtion");
+
     intervalRef.current = setInterval(() => {
+      if (indexx !== 2) {
+        indexx++;
+        items &&
+          items?.length > 0 &&
+          items[indexx].classList.add("service-aniamtion");
+      }
+
       setCurrentCategoryIndex((prevIndex) => {
         if (prevIndex >= 3) {
           clearInterval(intervalRef.current);
@@ -50,9 +74,10 @@ const Services = ({ content }) => {
     return () => clearInterval(intervalRef.current);
   }, [hasStarted]);
 
-  const handleCategoryIndex = (index) => {
-    setCurrentCategoryIndex(index);
-    clearInterval(intervalRef.current);
+  const handleCategoryIndex = (selectedIndex) => {
+    setCurrentCategoryIndex(selectedIndex);
+
+    // clearInterval(intervalRef.current);
   };
 
   useEffect(() => {

@@ -32,14 +32,27 @@ const Logos = ({ logos }) => {
       {logos?.map((logo, index) => (
         <SwiperSlide
           key={index}
-          className="relative lg:w-[11.5vw] lg:h-[6vw] w-[24%] h-[70px]"
+          className="relative lg:w-[12.5vw] lg:h-[7vw] w-[24%] h-[70px] lg:p-[0.5vw]  "
         >
-          <Image
-            fill
-            src={logo?.logos_image_special?.permalink}
-            alt="partner"
-            className="w-full object-contain"
-          />
+          {logo?.logos_url ? (
+            <>
+              <a href={logo?.logos_url}>
+                <Image
+                  fill
+                  src={logo?.logos_image_special?.permalink}
+                  alt="partner"
+                  className="w-full object-contain relativeImportant transition-all duration-300 transform lg:hover:scale-[1.05]"
+                />
+              </a>
+            </>
+          ) : (
+            <Image
+              fill
+              src={logo?.logos_image_special?.permalink}
+              alt="partner"
+              className="w-full object-contain relative transition-all duration-300 transform lg:hover:scale-[1.05]"
+            />
+          )}
         </SwiperSlide>
       ))}
 

@@ -6,7 +6,7 @@ import SmallCards from "./SmallCards";
 const News = ({ content, arabic }) => {
   return (
     <section id="newsSection">
-      <div className="Container1640 py220 ">
+      <div className="Container1640 pt220 ">
         <Content
           tagline={content?.tagline}
           title={content?.title}

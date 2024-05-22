@@ -15,16 +15,17 @@ const handelSubmit = (e) => {
 };
 
 const NewsLetter = ({ translations }) => {
-  const { email, handleSubmit, handleChange, formRef, error } = useNewsLetter({
-    errors: {
-      email: translations?.newsletter_emailError,
-      required: translations?.newsletter_requiredError
-    }
-  });
+  const { email, setEmail, handleSubmit, handleChange, formRef, error } =
+    useNewsLetter({
+      errors: {
+        email: translations?.newsletter_emailError,
+        required: translations?.newsletter_requiredError
+      }
+    });
   return (
     <MailchimpSubscribe
       url={
-        "https://mepco.us21.list-manag.com/subscribe/post?u=5db876185483a91d46ba241f9&amp;id=82793a1984&amp;f_id=0079fee6f0"
+        "https://mepco.us21.list-manage.com/subscribe/post?u=5db876185483a91d46ba241f9&amp;id=82793a1984&amp;f_id=0079fee6f0"
       }
       render={({ subscribe, status, message }) => {
         if (status == "success") {

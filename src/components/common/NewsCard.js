@@ -3,18 +3,79 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+export const formatDate = (dateStr, isAr) => {
+  // Check if the date string is in the correct format
+  const dateRegex =
+    /^\d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}$/;
+  if (!dateRegex.test(dateStr)) {
+    return "Invalid date format";
+  }
+
+  // Parse the input date string
+  const [day, month, year] = dateStr.split(" ");
+  const date = new Date(`${month} ${day}, ${year}`);
+
+  // Define locales and options
+  const enOptions = { year: "numeric", month: "long", day: "2-digit" };
+  const arOptions = { year: "numeric", month: "long", day: "2-digit" };
+
+  if (isAr) {
+    // Format date for Arabic locale with English format
+    const formattedDate = date.toLocaleDateString("en-US", enOptions);
+    // Reformat month to Arabic
+    const [monthName, dayEn, yearEn] = formattedDate.split(" ");
+    const arabicMonthNames = {
+      January: "يناير",
+      February: "فبراير",
+      March: "مارس",
+      April: "أبريل",
+      May: "مايو",
+      June: "يونيو",
+      July: "يوليو",
+      August: "أغسطس",
+      September: "سبتمبر",
+      October: "أكتوبر",
+      November: "نوفمبر",
+      December: "ديسمبر"
+    };
+    return `${arabicMonthNames[monthName]} ${dayEn}, ${yearEn}`;
+  } else {
+    // Format date for English locale with Arabic format
+    const formattedDate = date.toLocaleDateString("ar-EG", arOptions);
+    // Reformat day and year to English
+    const [dayAr, monthNameAr, yearAr] = formattedDate.split(" ");
+    const englishMonthNames = {
+      يناير: "January",
+      فبراير: "February",
+      مارس: "March",
+      أبريل: "April",
+      مايو: "May",
+      يونيو: "June",
+      يوليو: "July",
+      أغسطس: "August",
+      سبتمبر: "September",
+      أكتوبر: "October",
+      نوفمبر: "November",
+      ديسمبر: "December"
+    };
+    return `${dayAr.padStart(2, "0")} ${
+      englishMonthNames[monthNameAr]
+    } ${yearAr}`;
+  }
+};
+
 const NewsCard = ({ bigCard, content, arabic }) => {
   return (
     <div
       data-aos="fade"
-      className="flex flex-wrap  sm:gap-y-[25px] gap-y-[20px] items-center lg:gap-x-[2.08333333333vw]"
+      className="flex flex-wrap w-full lg:w-[unset] sm:gap-y-[25px] gap-y-[20px] items-center lg:gap-x-[2.08333333333vw]"
     >
       <Link
         className={`relative ${
           bigCard
             ? "lg:w-[27.0833333333vw] lg:h-[24.375vw]"
             : "lg:w-[19.7916666667vw] lg:h-[17.8125vw]"
-        } sm:w-[70%] w-full h-[250px] sm:h-[350px]`}
+        } sm:w-[70%] w-full h-[250px] sm:h-[350px]  border20 group overflow-hidden`}
         href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
       >
         {content?.news_image?.src && (
@@ -22,17 +83,17 @@ const NewsCard = ({ bigCard, content, arabic }) => {
             fill
             src={content?.news_image?.src}
             alt={checkIfContentExist(
-              content?.news_image?.src,
+              content?.news_image?.alt,
               content?.title,
               "News"
             )}
-            className="border20 object-cover"
+            className="border20 object-cover transition-all duration-300 transform group-hover:scale-[1.1]"
           />
         )}
         <span className="atlwhFull border20 bg-[#132D2B33]"></span>
       </Link>
       <div className="lg:w-[19.7916666667vw] w-full">
-        <span className="text18">{content?.date}</span>
+        <span className="text18">{formatDate(content?.date, arabic)}</span>
         <h4 className="text29 f700 mt12 line-clamp-2 lg:h-[3.75vw]">
           {content?.title}
         </h4>
@@ -44,7 +105,7 @@ const NewsCard = ({ bigCard, content, arabic }) => {
         ></div>
         <Link
           href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
-          className="newsLink text-[#5EBD8E] mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
+          className="newsLink text-[#5EBD8E] group  mt32 flex items-center lg:items-end lg:gap-x-[0.52083333333vw] sm:gap-x-[10px] gap-x-[8px]"
         >
           <span className="text24 ">
             {arabic ? "اقرا المزيد" : "Read More"}
@@ -52,7 +113,11 @@ const NewsCard = ({ bigCard, content, arabic }) => {
           <svg
             width="24"
             height="25"
-            className="flipped lg:w-[1.25vw] lg:h-[1.25vw] sm:w-[22px] sm:h-[22px] w-[20px] h-[20px]"
+            className={`flipped lg:w-[1.25vw] lg:h-[1.25vw] sm:w-[22px] sm:h-[22px] w-[20px] h-[20px] ${
+              arabic
+                ? " lg:group-hover:translate-x-[-0.5vw] "
+                : " lg:group-hover:translate-x-[0.5vw] "
+            } transition-all duration-300`}
             viewBox="0 0 24 25"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
