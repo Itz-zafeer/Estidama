@@ -9,7 +9,12 @@ import React from "react";
 
 export const revalidate = 5;
 export async function generateMetadata({ params }, parent) {
-  return await getMetaData({ slug: params.slug });
+  const data = await getSingleNewsData(params.slug, "arabic");
+  return await getMetaData({
+    slug: params.slug,
+    isAr: false,
+    fetchedData: data
+  });
 }
 const page = async ({ params }) => {
   const slug = params.slug;
