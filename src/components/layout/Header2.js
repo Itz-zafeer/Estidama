@@ -104,10 +104,12 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
 
     return () => {
       // Cleanup observer on unmount
-      navLinks.forEach((navLink) => {
-        const section = document.getElementById(navLink.id);
-        if (section) observer.unobserve(section);
-      });
+      if (!deepGreen) {
+        navLinks.forEach((navLink) => {
+          const section = document.getElementById(navLink.id);
+          if (section) observer.unobserve(section);
+        });
+      }
 
       window.removeEventListener("scroll", handleScroll);
     };
