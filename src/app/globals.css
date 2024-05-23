@@ -286,9 +286,30 @@ header.fixedHeader > div {
 .swiper-wrapper {
   @apply lg:justify-center;
 }
-.swiper-button-next,
-.swiper-button-prev {
-  @apply md:w-[2.96875vw] md:h-[2.96875vw] top-[unset] bottom-0;
+.partnersSwiperMain .swiper-button-next,
+.partnersSwiperMain .swiper-button-prev {
+  @apply hidden lg:flex md:w-[2.96875vw] md:h-[2.96875vw] border-[2px] border-[#5EBD8E] rounded-[50%];
+}
+.partnersSwiperMain .partnersSwiper .swiper-button-next,
+.partnersSwiperMain .partnersSwiper .swiper-button-prev {
+  @apply hidden;
+}
+.rtl .partnersSwiperMain .swiper-button-next {
+  @apply right-[unset] lg:left-[3%];
+}
+.ltr .partnersSwiperMain .swiper-button-next {
+  @apply left-[unset] lg:right-[3%];
+}
+.rtl .partnersSwiperMain .swiper-button-prev {
+  @apply left-[unset] lg:right-[3%];
+}
+.ltr .partnersSwiperMain .swiper-button-prev {
+  @apply right-[unset] lg:left-[3%];
+}
+
+.partnersSwiperMain .swiper-button-next svg,
+.partnersSwiperMain .swiper-button-prev svg {
+  @apply w-[25%];
 }
 .service-category {
   @apply transition-all duration-[1s];
