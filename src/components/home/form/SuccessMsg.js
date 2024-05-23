@@ -8,7 +8,7 @@ const SuccessMsg = ({ message }) => {
         <span className="text35  text-green-600 f700  text-center capitalize">
           {message}
         </span>
-        <div className="relative lg:w-[2.5vw] lg:h-[2.5vw] mt-[16px] lg:mt-[1vw] sm:w-[40px] sm:h-[40px] w-[35px] h-[35px]">
+        <div className="relative lg:w-[5vw] lg:h-[5vw] mt-[16px] lg:mt-[1vw] sm:w-[40px] sm:h-[40px] w-[70px] h-[70px]">
           <Image fill src="/images/icons/success.svg" alt="success" />
         </div>
       </div>

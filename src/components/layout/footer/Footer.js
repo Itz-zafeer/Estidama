@@ -29,7 +29,7 @@ const Footer = ({ translations, navItems, socialIconsData, deepGreen }) => {
   return (
     <footer>
       <div className="bg-[#3A8873]">
-        <div className="lg:py-[4.6875vw] py220 Container1640 flex items-center lg:gap-x-[6.35416666667vw] flex-wrap sm:gap-y-[40px] gap-y-[35px]">
+        <div className="lg:py-[4.6875vw] py220 Container1640 flex items-center lg:justify-between flex-wrap sm:gap-y-[40px] gap-y-[35px]">
           <div>
             <span
               onClick={() => scrollToSection("heroSection")}

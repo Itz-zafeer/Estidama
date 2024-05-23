@@ -13,7 +13,7 @@ const SubHero = ({ title, img, arabic }) => {
     setUrl(window.location.href);
   }, []);
   return (
-    <div className="flex justify-between items-center flex-wrap gap-y-[20px]">
+    <div className="flex justify-between items-start flex-col lg:flex-row lg:items-center flex-wrap gap-y-[20px]">
       <div className="lg:w-[41.25vw]">
         <Link
           href={arabic ? "/news" : "/en/news"}
@@ -49,13 +49,6 @@ const SubHero = ({ title, img, arabic }) => {
             >
               <img
                 src="/images/icons/share_icons/linkedin.svg"
-                alt="linkedin"
-                className="min-w-[20px] w-[20px] lg:min-w-[1.25vw] lg:w-[1.25vw]"
-              />
-            </a>
-            <a href={`instagram://library?AssetPath=${img}`} target="_blank">
-              <img
-                src="/images/icons/share_icons/instagram.svg"
                 alt="linkedin"
                 className="min-w-[20px] w-[20px] lg:min-w-[1.25vw] lg:w-[1.25vw]"
               />

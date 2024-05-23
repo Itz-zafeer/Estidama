@@ -55,7 +55,7 @@ const Services = ({ content }) => {
       items[indexx].classList.add("service-aniamtion");
 
     intervalRef.current = setInterval(() => {
-      if (indexx !== 2) {
+      if (indexx !== items?.length - 1) {
         indexx++;
         items &&
           items?.length > 0 &&
@@ -63,9 +63,9 @@ const Services = ({ content }) => {
       }
 
       setCurrentCategoryIndex((prevIndex) => {
-        if (prevIndex >= 3) {
+        if (prevIndex >= items?.length) {
           clearInterval(intervalRef.current);
-          return 3; // Reset to 1 if it goes beyond 3
+          return items?.length; // Reset to 1 if it goes beyond 3
         }
         return prevIndex + 1;
       });

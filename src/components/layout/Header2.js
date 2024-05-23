@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { isValidUrl } from "./footer/NavLink";
 
 // const initialNavLinks = [
 //   {
@@ -34,6 +35,7 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
   const [navLinks] = useState(initialNavLinks);
   const [activeLink, setActiveLink] = useState("");
   const [isFixed, setIsFixed] = useState(false);
+  const lastScrollY = useRef(0);
   const router = useRouter();
 
   const scrollToSection = (id) => {
@@ -42,7 +44,11 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
     }
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      const offset = document.querySelector("header").offsetHeight / 1.5;
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+      // section.scrollIntoView({ behavior: "smooth"});
       setActiveLink(id);
       history.pushState(null, "", `#${id.replace("Section", "")}`);
     }
@@ -54,7 +60,6 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
     if (!deepGreen) {
       const hash = window.location.hash.substring(1);
       const initialSectionId = `${hash}Section`;
-      console.log(initialSectionId);
       if (hash && document.getElementById(initialSectionId)) {
         setActiveLink(initialSectionId);
         document
@@ -87,21 +92,6 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
       });
     }
 
-    // Handle fixed header on scroll
-    const handleScroll = () => {
-      if (window.scrollY > window.innerHeight / 2) {
-        if (!isFixed) {
-          setIsFixed(true);
-        }
-      } else {
-        if (isFixed) {
-          setIsFixed(false);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
     return () => {
       // Cleanup observer on unmount
       if (!deepGreen) {
@@ -110,18 +100,41 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
           if (section) observer.unobserve(section);
         });
       }
-
-      window.removeEventListener("scroll", handleScroll);
     };
   }, [navLinks]);
 
   useEffect(() => {
-    if (isFixed) {
-      document.getElementById("header").classList.add("visible");
-    } else {
-      document.getElementById("header").classList.remove("visible");
-    }
-  }, [isFixed]);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const screenHeightHalf = window.innerHeight / 2;
+
+      if (currentScrollY < screenHeightHalf) {
+        // Scroll position is less than half the screen height
+        setIsFixed(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        // User is scrolling up
+        setIsFixed(true);
+      } else {
+        // User is scrolling down
+        setIsFixed(false);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (isFixed) {
+  //     document.getElementById("header").classList.add("visible");
+  //   } else {
+  //     document.getElementById("header").classList.remove("visible");
+  //   }
+  // }, [isFixed]);
 
   function toggleSidebar() {
     if (window.innerWidth < 1023) {
@@ -165,22 +178,36 @@ const Header = ({ deepGreen, translations, initialNavLinks }) => {
         </span>
         <nav className="text20 text-[#FFFFFF] flex lg:gap-x-[10.5729166667vw] items-center">
           <ul className="sideBar lg:h-[unset] lg:w-[unset] h-[100vh] atlwhFull lg:static lg:p-[unset] px-[5%] sm:pt-[40vw] pt-[50vw] flex flex-col gap-y-[30px] sm:gap-y-[50px] lg:flex-row items-center lg:gap-x-[2.91666666667vw]">
-            {navLinks.map(
-              (navLink, i) =>
-                i !== navLinks.length - 1 && (
-                  <li
-                    onClick={() => {
-                      scrollToSection(navLink.id);
-                      toggleSidebar();
-                    }}
-                    key={i}
-                    className={`${
-                      activeLink === navLink.id ? "active" : ""
-                    } lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}
+            {navLinks.map((navLink, i) =>
+              i !== navLinks.length - 1 && isValidUrl(navLink?.id) ? (
+                <li
+                  key={i}
+                  className={`${
+                    activeLink === navLink.id ? "active" : ""
+                  } lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}
+                >
+                  <a
+                    href={navLink.id}
+                    target="_blank"
+                    className="block cursor-pointer"
                   >
-                    <span className="block cursor-pointer">{navLink.text}</span>
-                  </li>
-                )
+                    {navLink.text}
+                  </a>
+                </li>
+              ) : (
+                <li
+                  onClick={() => {
+                    scrollToSection(navLink.id);
+                    toggleSidebar();
+                  }}
+                  key={i}
+                  className={`${
+                    activeLink === navLink.id ? "active" : ""
+                  } lg:pb-[unset] pb-[2vw] border-b lg:border-b-[0] w-full lg:w-[unset]`}
+                >
+                  <span className="block cursor-pointer">{navLink.text}</span>
+                </li>
+              )
             )}
             <li className="lg:hidden block mt-[30px]">
               <span

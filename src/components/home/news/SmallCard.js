@@ -9,11 +9,11 @@ const SmallCard = ({ content, delay, arabic }) => {
     <div
       data-aos="fade"
       data-aos-delay={delay ? delay : 0}
-      className="flex flex-wrap w-full lg:w-[unset] sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
+      className="flex flex-wrap flex-col lg:flex-row w-full lg:w-[unset] sm:gap-y-[25px] gap-y-[20px] lg:gap-x-[2.1875vw] items-center"
     >
       <Link
         href={`${arabic ? "" : "/en"}/news/${content?.slug}`}
-        className="relative lg:w-[12.3958333333vw] border20 group overflow-hidden lg:h-[11.1458333333vw] sm:w-[60%] w-[50%] h-[150px] sm:h-[250px]"
+        className="relative lg:w-[12.3958333333vw] border20 group overflow-hidden lg:h-[11.1458333333vw] sm:w-[60%] w-full h-[250px] sm:h-[250px]"
       >
         {content?.news_image?.src && (
           <Image
@@ -29,7 +29,7 @@ const SmallCard = ({ content, delay, arabic }) => {
         )}
         <span className="atlwhFull border20 bg-[#132D2B33]"></span>
       </Link>
-      <div className="lg:w-[19.7916666667vw]  ">
+      <div className="lg:w-[19.7916666667vw] w-full  ">
         <span className="text18">{formatDate(content?.date, arabic)}</span>
         <h4 className="text29 mt12 f700 line-clamp-2 lg:h-[3.75vw]">
           {content?.title}

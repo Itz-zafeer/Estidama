@@ -22,7 +22,6 @@ const getMetaData = async ({ slug, isAr, fetchedData }) => {
   const image = pageSeo?.seo_image?.src
     ? pageSeo?.seo_image?.src
     : fallbackSeo?.seo_image?.src;
-
   return {
     title: title,
     description: description,

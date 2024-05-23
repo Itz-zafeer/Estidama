@@ -55,10 +55,7 @@ export const formatDate = (dateStr, isAr) => {
       November: "نوفمبر",
       December: "ديسمبر"
     };
-    return `${arabicMonthNames[monthName]} ${dayEn.padStart(
-      2,
-      "0"
-    )}, ${yearEn}`;
+    return `${arabicMonthNames[monthName]} ${dayEn.padStart(2, "0")} ${yearEn}`;
   } else {
     // Format date for English locale with Arabic format
     const formattedDate = date.toLocaleDateString("ar-EG", arOptions);
@@ -80,7 +77,7 @@ export const formatDate = (dateStr, isAr) => {
     };
     const englishDay = convertArabicNumeralsToEnglish(dayAr.padStart(2, "0"));
     const englishYear = convertArabicNumeralsToEnglish(yearAr);
-    return `${englishDay} ${englishMonthNames[monthNameAr]} ${englishYear}`;
+    return `${englishMonthNames[monthNameAr]}  ${englishDay},  ${englishYear}`;
   }
 };
 

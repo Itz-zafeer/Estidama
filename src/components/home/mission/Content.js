@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-const Content = ({ title, desc, counter1, counter2 }) => {
+const Content = ({ title, desc, counter1, counter2, arabic }) => {
   const ref = useRef(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [count, setCount] = useState(0);
@@ -19,12 +19,15 @@ const Content = ({ title, desc, counter1, counter2 }) => {
   };
 
   const animateNumber = () => {
-    let start = 0;
+    const start =
+      counter1?.number > 15 ? counter1?.number / 2 : counter1?.number;
+    const start2 =
+      counter2?.number > 15 ? counter2?.number / 2 : counter2?.number;
     const end = counter1?.number;
     const end2 = counter2?.number;
     const duration = 1000; // in milliseconds
     const range = end - start;
-    const range2 = end2 - start;
+    const range2 = end2 - start2;
     let startTime = null;
 
     const step = (timestamp) => {
@@ -33,8 +36,8 @@ const Content = ({ title, desc, counter1, counter2 }) => {
       }
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      setCount(Math.floor(percentage * range));
-      setCount2(Math.floor(percentage * range2));
+      setCount(Math.floor(start + percentage * range));
+      setCount2(Math.floor(start2 + percentage * range2));
       if (progress < duration) {
         window.requestAnimationFrame(step);
       }
@@ -84,7 +87,13 @@ const Content = ({ title, desc, counter1, counter2 }) => {
         className="flex items-center lg:gap-x-[4.42708333333vw] sm:gap-x-[55px] gap-[10px] flex-wrap lg:mt-[2.08333333333vw] sm:mt-[30px] mt-[20px]"
       >
         <div className="lg:max-w-[44%]">
-          <div className="flex items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]">
+          <div
+            className={`flex relative ${
+              arabic
+                ? "right-[-4px] lg:right-[-0.3vw] "
+                : "left-[-4px] left-[-0.3vw]"
+            } items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]`}
+          >
             {/* <span className='text100 text-[#5EBD8E]'>٤٠</span> */}
             <span className="text100 text-[#5EBD8E]">{count}</span>
             <span className="text20 text-[#000000] text-opacity-[0.7] lg:mb-[0.3125vw] mb-[6px]">
@@ -96,7 +105,13 @@ const Content = ({ title, desc, counter1, counter2 }) => {
           </p>
         </div>
         <div className="lg:max-w-[44%]">
-          <div className="flex items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]">
+          <div
+            className={`flex relative ${
+              arabic
+                ? "right-[-4px] lg:right-[-0.3vw] "
+                : "left-[-4px] left-[-0.3vw]"
+            } items-end lg:gap-x-[0.20833333333vw] gap-x-[4px]`}
+          >
             {/* <span className='text100 text-[#5EBD8E]'>١٩ </span> */}
             <span className="text100 text-[#5EBD8E]">{count2} </span>
             <span className="text20 text-[#000000] text-opacity-[0.7] lg:mb-[0.3125vw] mb-[6px]">

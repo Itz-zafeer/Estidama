@@ -58,7 +58,7 @@ const NewsLetter = ({ translations }) => {
                 </span>
               )}
               {status == "success" && (
-                <span className=" text18 font-[300]  text-green-600  font-[500]">
+                <span className=" text18 font-[300]  text-white  font-[500]">
                   {translations?.newsletter_successMessage}
                 </span>
               )}

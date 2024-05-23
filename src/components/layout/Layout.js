@@ -19,7 +19,6 @@ const Layout = async ({ children, deepGreen, arabic }) => {
       id: page?.permalink.replace("#", "") + "Section"
     });
   });
-  console.log(translationsData.translations.layout);
   return (
     <>
       <Header

@@ -97,7 +97,6 @@ const Header = ({ deepGreen, translations }) => {
         }
         return acc;
       }, null);
-      console.log(activeLinkId);
       sethandelActive(activeLinkId);
     };
     window.addEventListener("scroll", handleFixedHeader);

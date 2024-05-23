@@ -74,7 +74,7 @@ export const homeQuery = () => {
           selected_news {
             title
             slug
-            date(format: "Y")
+            date(format: "d M Y")
             ... on Entry_News_News {
               news_image {
                 extension

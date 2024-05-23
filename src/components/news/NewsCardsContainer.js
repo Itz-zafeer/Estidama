@@ -23,6 +23,7 @@ const NewsCardsContainer = ({ newsData, currentPage, lastPage, arabic }) => {
   const [lastPageNumber, setLastPageNumber] = useState(lastPage);
   const [news, setNews] = useState(newsData?.entries?.data);
   const [isLoading, setIsloading] = useState(false);
+  const containerRef = useRef(null);
 
   const updateData = async () => {
     setIsloading(true);
@@ -40,12 +41,24 @@ const NewsCardsContainer = ({ newsData, currentPage, lastPage, arabic }) => {
     setIsloading(false);
   };
 
+  const updateScroll = () => {
+    if (window.innerWidth < 768) {
+      const offset = document.querySelector("header").offsetHeight;
+      const y =
+        containerRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   useSkipFirstRenderEffect(() => {
     updateData();
+    updateScroll();
   }, [currentPageNumber]);
 
   return (
-    <section>
+    <section ref={containerRef}>
       <div className="Container1640 pb220">
         <div className="mt56  flex flex-wrap sm:gap-[40px] gap-[30px] lg:gap-[2.08333333333vw] items-center">
           {isLoading

@@ -11,7 +11,7 @@ export const singleNewsQuery = () => {
         ... on Entry_News_News {
           news_image {
             extension
-            src(width: 200, height: 200)
+            src(width: 1360, height: 666)
             ... on Asset_Assets {
               alt
             }
@@ -24,7 +24,7 @@ export const singleNewsQuery = () => {
           seo_keywords
           seo_image {
             extension
-            src(width: 200, height: 200)
+            src(width: 1200, height: 628)
           }
         }
       }
